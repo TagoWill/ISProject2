@@ -48,9 +48,6 @@ public class SignUp extends HttpServlet {
 		String username = request.getParameter("username");
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
-        
-        String message;
-        System.out.println("Cheguei aqui");
 
         if(password.equals(password2)){
         	if(login.registerUser(nome,username, password,email)){

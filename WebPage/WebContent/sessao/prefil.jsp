@@ -7,20 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p>Nome: ${nome}</p>
+	<p>User: ${user}</p>
+	<p>Email: ${email}</p>
+	<p>Password: ${password}</p>
 
-	<p>Bem-vindo ${nome} de user ${user}</p>
 
-	<form action="">
-		<input type="submit" value="PlayLists">
+	<form action="EditarPrefilSevlet">
+		<input type="submit" value="Salvar">
 	</form>
-	<form action="">
-		<input type="submit" value="Musics">
+	<form action="DeletePrefilServlet">
+		<input type="submit" value="Apagar conta">
 	</form>
-	<form action="PrefilServlet" method="post">
-		<input type="submit" value="Prefil">
+	<form action="paginainicial.jsp">
+		<input type="submit" value="Back">
 	</form>
-	<form action="LogOutServlet" method="post">
-		<input type="submit" value="LogOut">
-	</form>
+
 </body>
 </html>

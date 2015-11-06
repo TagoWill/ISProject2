@@ -8,5 +8,5 @@ import ligacao.Users;
 public interface UserLoginRegisterRemote {
 	public boolean registerUser(String nome, String user, String password, String email);
 	public Users loginUser(String user, String password);
-	public Users devolverTeste(String user);
+	public Users devolverPorId(String id);
 }

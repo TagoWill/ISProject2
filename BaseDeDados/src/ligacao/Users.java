@@ -11,20 +11,20 @@ import javax.persistence.*;
 
 public class Users implements Serializable {
 
-	
+
 	private static final long serialVersionUID = 1L;
 
-	 @Id @GeneratedValue(strategy=GenerationType.AUTO)
-	 private int id;
-	 private String user;
-	 private String password;
-	 private String nome;
-	 private String email;
-	
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private String user;
+	private String password;
+	private String nome;
+	private String email;
+
 	public Users() {
 		super();
 	}
-	
+
 	public Users(String nome, String user, String password, String email){
 		this.setUser(user);
 		this.setPassword(password);
@@ -63,5 +63,12 @@ public class Users implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-   
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

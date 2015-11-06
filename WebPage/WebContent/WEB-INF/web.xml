@@ -28,6 +28,14 @@
     <servlet-name>LogOut</servlet-name>
     <url-pattern>/sessao/LogOutServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Prefil</servlet-name>
+    <servlet-class>site.Prefil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Prefil</servlet-name>
+    <url-pattern>/sessao/PrefilServlet</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>loginFilter</filter-name>
     <filter-class>site.LoginFilter</filter-class>
