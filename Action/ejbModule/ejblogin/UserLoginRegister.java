@@ -20,10 +20,17 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
         // TODO Auto-generated constructor stub
     }
     
-    public void registerUser(String nome, String user, String password, String email){
-    	Users teste = new Users(nome, user, password, email);
-    	
-    	cursor.persist(teste);
+    public boolean registerUser(String nome, String user, String password, String email){
+    	Users novaconta = new Users(nome, user, password, email);
+    	System.out.println("Cheguei aqui");
+    	try{
+    		System.out.println("Cheguei aqui2");
+    		cursor.persist(novaconta);
+    		return true;
+    	}catch(Exception e){
+    		System.out.println("ERROR: "+e);
+    		return false;
+    	}
     }
     
     public Users loginUser(String user, String password){

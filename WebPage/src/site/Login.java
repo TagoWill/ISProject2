@@ -46,12 +46,20 @@ public class Login extends HttpServlet {
 		//doGet(request, response);
 		String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Users conta = teste.loginUser(username, password);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", conta.getUser());
-        request.setAttribute("nome", "adeus");
-        //response.sendRedirect(request.getContextPath() + "/sessao/paginainicial.jsp");
-        request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
+        System.out.println("user: "+username);
+        /* ainda posso melhorar*/
+        if(!username.equals("")){
+        	Users conta = teste.loginUser(username, password);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", conta.getUser());
+            request.setAttribute("nome", "adeus");
+            //response.sendRedirect(request.getContextPath() + "/sessao/paginainicial.jsp");
+            request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
+        }else{
+        	request.setAttribute("message", "Username esta vazio");
+        	request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+        
 	}
 
 }

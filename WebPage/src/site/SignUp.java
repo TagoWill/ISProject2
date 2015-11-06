@@ -35,9 +35,7 @@ public class SignUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-        
-        
+
 	}
 
 	/**
@@ -53,13 +51,18 @@ public class SignUp extends HttpServlet {
         
         String message;
         System.out.println("Cheguei aqui");
+
         if(password.equals(password2)){
-        	login.registerUser(nome,username, password,email);
-        	message = "Registo feito com sucesso";
-            response.sendRedirect("index.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
+        	if(login.registerUser(nome,username, password,email)){
+        		request.setAttribute("message", "Registo feito com sucesso");
+        		request.getRequestDispatcher("index.jsp").forward(request, response);
+        	}else{
+        		request.setAttribute("error", "Erro: Problemas no registo");
+        		request.getRequestDispatcher("/register.jsp").forward(request, response);
+        	}
+        	
         }else{
         	request.setAttribute("error", "Erro: Password nao estao iguais");
-        	//response.sendRedirect("register.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
         	request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
 	}

@@ -18,7 +18,7 @@
     		<input type="submit" value="SignUp">
 		</form>
  
- 		<p>${param.message}</p><!-- Mensagem de erro -->
+ 		<p>${message}</p><!-- Mensagem de erro -->
  
     </div>
 </body>
