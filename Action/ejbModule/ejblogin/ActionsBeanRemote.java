@@ -4,6 +4,8 @@ import javax.ejb.Remote;
 
 @Remote
 public interface ActionsBeanRemote {
+	public void editProfile(String id, String user, String nome, String mail, String password);
+	public void deleteProfile(String id);
 	public void addPlaylist(String user, String playlist_name);
 	public void editPlaylist(String user, String playlist_name);
 	public void deletePlaylist(String user, String playlist_name);
@@ -16,5 +18,4 @@ public interface ActionsBeanRemote {
 	public void detachFromMusic(String user, String title);
 	public void listAllMusic(String user);
 	public void searchAndListMusic(String user, String title, String artist);
-	
 }

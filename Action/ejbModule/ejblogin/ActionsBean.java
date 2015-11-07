@@ -16,6 +16,18 @@ public class ActionsBean implements ActionsBeanRemote {
     public ActionsBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    @Override
+	public void editProfile(String id, String user, String nome, String mail, String password) {
+		// Editar perfil do Utilizador
+		
+	}
+
+	@Override
+	public void deleteProfile(String id) {
+		// Apagar Perfil de Utilizador
+		
+	}
 
 	@Override
 	public void addPlaylist(String user, String playlist_name) {
