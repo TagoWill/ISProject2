@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="EditarPrefilSevlet">
+	<form action="EditarPrefilSevlet" method="post">
 		<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
-		<p>User: <input type="text" name="nome" value="${user}"> </p>
-		<p>Email: <input type="text" name="nome" value="${email}"> </p>
-		<p>Password: <input type="password" name="nome" value="${password}"> </p>
+		<p>User: ${user} </p>
+		<p>Email: <input type="text" name="email" value="${email}"> </p>
+		<p>Password: <input type="password" name="password" value="${password}"> </p>
 		<input type="submit" value="Salvar">
 	</form>
 	<form action="DeletePrefilServlet">

@@ -33,8 +33,8 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 	}
 
 	public boolean verifyRegister(String user){
-		javax.persistence.Query q = cursor.createQuery("from Users u where u.user = :t");
 		try{
+			javax.persistence.Query q = cursor.createQuery("from Users u where u.username = :t");
 			q.setParameter("t", user);
 
 			@SuppressWarnings("all")
@@ -54,9 +54,9 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 	}
 
 	public Users loginUser(String user, String password){
-		javax.persistence.Query q = cursor.createQuery("from Users u where u.user = :t"
-				+ " and password = :p");
 		try{
+			javax.persistence.Query q = cursor.createQuery("from Users u where u.username = :t"
+					+ " and password = :p");
 			q.setParameter("t", user);
 			q.setParameter("p", password);
 
