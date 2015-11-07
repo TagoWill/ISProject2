@@ -4,18 +4,18 @@ import javax.ejb.Remote;
 
 @Remote
 public interface ActionsBeanRemote {
-	public void editProfile(String id, String user, String nome, String mail, String password);
-	public void deleteProfile(String id);
-	public void addPlaylist(String user, String playlist_name);
-	public void editPlaylist(String user, String playlist_name);
-	public void deletePlaylist(String user, String playlist_name);
-	public void listMyPlaylists(String user, String order);
-	public void listMyMusicFiles(String user, String playlist_name);
-	public void addMusicFileToPlaylist(String user, String playlist_name);
-	public void deleteMusicFileFromPlaylist(String user, String playlist_name);
-	public void addMusicFile(String user, String title, String artist, String album, String year, String path);
-	public void editMusicFile(String user, String title, String artist, String album, String year, String path);
-	public void detachFromMusic(String user, String title);
-	public void listAllMusic(String user);
-	public void searchAndListMusic(String user, String title, String artist);
+	public void editProfile(String userid, String name, String mail, String password);
+	public void deleteProfile(String userid);
+	public void addPlaylist(String userid, String playlist_name);
+	public void editPlaylist(String userid, String playlist_name);
+	public void deletePlaylist(String userid, String playlist_name);
+	public void listMyPlaylists(String userid, String order);
+	public void listMyMusicFiles(String userid, String playlist_name);
+	public void addMusicFileToPlaylist(String userid, String playlist_name);
+	public void deleteMusicFileFromPlaylist(String userid, String playlist_name);
+	public void addMusicFile(String userid, String title, String artist, String album, String year, String path);
+	public void editMusicFile(String userid, String title, String artist, String album, String year, String path);
+	public void detachFromMusic(String userid, String title);
+	public void listAllMusic(String userid);
+	public void searchAndListMusic(String userid, String title, String artist);
 }
