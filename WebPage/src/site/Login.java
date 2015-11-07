@@ -36,8 +36,6 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.sendRedirect("sessao/paginainicial.jsp");
-		//request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
 	}
 
 	/**
@@ -55,10 +53,11 @@ public class Login extends HttpServlet {
         	if(login != null){
         		HttpSession session = request.getSession();
                 session.setAttribute("user", login.getId());
-                request.setAttribute("user", login.getUser());
-                request.setAttribute("nome", login.getNome());
+                request.setAttribute("user", login.getUser()); /*Sem sentido*/
+                request.setAttribute("nome", login.getNome()); /*Sem sentido*/
                 //response.sendRedirect(request.getContextPath() + "/sessao/paginainicial.jsp");
-                doGet(request,response);
+                /*TODO Abrir servlet em vez de pagina para it para a pagina inicial*/
+                request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
         	}else{
         		request.setAttribute("message", "User não valido");
         		request.getRequestDispatcher("/index.jsp").forward(request, response);

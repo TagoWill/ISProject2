@@ -47,7 +47,7 @@ public class Prefil extends HttpServlet {
 		request.setAttribute("user", login.getUser());
 		request.setAttribute("email", login.getEmail());
 		request.setAttribute("password", login.getPassword());
-		
+		//response.sendRedirect(request.getContextPath() + "/sessao/prefil.jsp");
 		request.getRequestDispatcher("/sessao/prefil.jsp").forward(request, response);
 	}
 

@@ -34,7 +34,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Prefil</servlet-name>
-    <url-pattern>/sessao/PrefilServlet</url-pattern>
+    <url-pattern>/PrefilServlet</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>loginFilter</filter-name>

@@ -7,19 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Nome: ${nome}</p>
-	<p>User: ${user}</p>
-	<p>Email: ${email}</p>
-	<p>Password: ${password}</p>
-
-
 	<form action="EditarPrefilSevlet">
+		<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
+		<p>User: <input type="text" name="nome" value="${user}"> </p>
+		<p>Email: <input type="text" name="nome" value="${email}"> </p>
+		<p>Password: <input type="password" name="nome" value="${password}"> </p>
 		<input type="submit" value="Salvar">
 	</form>
 	<form action="DeletePrefilServlet">
 		<input type="submit" value="Apagar conta">
 	</form>
-	<form action="paginainicial.jsp">
+	<form action="sessao/paginainicial.jsp">
 		<input type="submit" value="Back">
 	</form>
 
