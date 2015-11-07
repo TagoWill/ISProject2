@@ -29,6 +29,28 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 			//System.out.println("ERROR: "+e);
 			return false;
 		}
+
+	}
+
+	public boolean verifyRegister(String user){
+		javax.persistence.Query q = cursor.createQuery("from Users u where u.user = :t");
+		try{
+			q.setParameter("t", user);
+
+			@SuppressWarnings("all")
+			Users conta = (Users) q.getSingleResult();
+			//System.out.println("TESTE: "+teste.getUser());
+			
+			if(conta == null){
+				return true;
+			}else{
+				return false;
+			}
+
+		}catch(Exception e){
+			//return null;
+			return true;
+		}
 	}
 
 	public Users loginUser(String user, String password){

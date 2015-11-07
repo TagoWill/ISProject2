@@ -1,7 +1,6 @@
 package site;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -49,17 +48,22 @@ public class SignUp extends HttpServlet {
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
 
-        if(password.equals(password2)){
-        	if(login.registerUser(nome,username, password,email)){
-        		request.setAttribute("message", "Registo feito com sucesso");
-        		request.getRequestDispatcher("index.jsp").forward(request, response);
-        	}else{
-        		request.setAttribute("error", "Erro: Problemas no registo");
-        		request.getRequestDispatcher("/register.jsp").forward(request, response);
-        	}
-        	
+        if(login.verifyRegister(username)){
+        	if(password.equals(password2)){
+            	if(login.registerUser(nome,username, password,email)){
+            		request.setAttribute("message", "Registo feito com sucesso");
+            		request.getRequestDispatcher("index.jsp").forward(request, response);
+            	}else{
+            		request.setAttribute("error", "Erro: Problemas no registo");
+            		request.getRequestDispatcher("/register.jsp").forward(request, response);
+            	}
+            	
+            }else{
+            	request.setAttribute("error", "Erro: Password nao estao iguais");
+            	request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
         }else{
-        	request.setAttribute("error", "Erro: Password nao estao iguais");
+        	request.setAttribute("error", "Erro: User ja existe");
         	request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
 	}
