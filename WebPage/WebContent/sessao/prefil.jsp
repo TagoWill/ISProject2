@@ -17,7 +17,7 @@
 	<form action="DeletePrefilServlet">
 		<input type="submit" value="Apagar conta">
 	</form>
-	<form action="sessao/paginainicial.jsp">
+	<form action="BackToMenuServlet" method="post">
 		<input type="submit" value="Back">
 	</form>
 
