@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>WebPage</display-name>
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>site.Login</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Register</servlet-name>
-    <servlet-class>site.SignUp</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Register</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>LogOut</servlet-name>
-    <servlet-class>site.LogOut</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogOut</servlet-name>
-    <url-pattern>/sessao/LogOutServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Prefil</servlet-name>
-    <servlet-class>site.Prefil</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Prefil</servlet-name>
-    <url-pattern>/PrefilServlet</url-pattern>
-  </servlet-mapping>
-  <filter>
-    <filter-name>loginFilter</filter-name>
-    <filter-class>site.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/sessao/*</url-pattern>
-  </filter-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>WebPage</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>site.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/sessao/*</url-pattern>
+	</filter-mapping>
 </web-app>

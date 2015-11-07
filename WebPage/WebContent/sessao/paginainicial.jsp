@@ -16,10 +16,10 @@
 	<form action="">
 		<input type="submit" value="Musics">
 	</form>
-	<form action="PrefilServlet" method="post">
+	<form action="Prefil" method="post">
 		<input type="submit" value="Prefil">
 	</form>
-	<form action="LogOutServlet" method="post">
+	<form action="LogOut" method="post">
 		<input type="submit" value="LogOut">
 	</form>
 </body>

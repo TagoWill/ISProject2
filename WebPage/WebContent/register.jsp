@@ -8,7 +8,7 @@
 </head>
 <body>
 
-		<form action="RegisterServlet" method="post">
+		<form action="SignUp" method="post">
             Nome:  <input type="text" name="nome" size="20px"> <br>
             Email:  <input type="text" name="email" size="20px"> <br>
             User:  <input type="text" name="username" size="20px"> <br>

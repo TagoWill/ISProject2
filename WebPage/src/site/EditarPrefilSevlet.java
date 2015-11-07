@@ -50,7 +50,7 @@ public class EditarPrefilSevlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		System.out.println("PRINTES! nome: "+nome +" email: "+email+" password: "+password);
-		
+		/*TODO FALTA COISAS*/
 		conta.editProfile(session.getAttribute("user").toString(), nome, email, password);
 	}
 

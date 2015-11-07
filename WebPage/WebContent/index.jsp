@@ -9,7 +9,7 @@
 <body>
 	<div align="center" style="margin-top: 50px;">
 
-		<form action="LoginServlet" method="post">
+		<form action="Login" method="post">
 			Please enter your Username: <input type="text" name="username"
 				size="20px"> <br> Please enter your Password: <input
 				type="password" name="password" size="20px"> <br>
