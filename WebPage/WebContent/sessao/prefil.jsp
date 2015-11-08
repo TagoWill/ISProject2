@@ -20,6 +20,9 @@
 	<form action="BackToMenuServlet" method="post">
 		<input type="submit" value="Back">
 	</form>
+	
+	<p></p>
+	${error}
 
 </body>
 </html>

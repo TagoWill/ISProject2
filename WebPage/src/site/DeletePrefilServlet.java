@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejblogin.ActionsBean;
+import ejblogin.ActionsBeanRemote;
 
 /**
- * Servlet implementation class EditarPrefilSevlet
+ * Servlet implementation class DeletePrefilServlet
  */
-@WebServlet("/EditarPrefilSevlet")
-public class EditarPrefilSevlet extends HttpServlet {
+@WebServlet("/DeletePrefilServlet")
+public class DeletePrefilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
 	@EJB
-	ActionsBean conta;
+	ActionsBeanRemote conta;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditarPrefilSevlet() {
+    public DeletePrefilServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,7 @@ public class EditarPrefilSevlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -45,18 +45,9 @@ public class EditarPrefilSevlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		if(conta.editProfile(session.getAttribute("user").toString(), nome, email, password)){
-			request.setAttribute("error", "Salvo");
-			request.getRequestDispatcher("Prefil").forward(request, response);
-		}else{
-			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
-			request.getRequestDispatcher("Prefil").forward(request, response);
-		}
-		
-		
+		conta.deleteProfile(session.getAttribute("user").toString());
+		session.invalidate();
+		response.sendRedirect("index.jsp");
 	}
 
 }

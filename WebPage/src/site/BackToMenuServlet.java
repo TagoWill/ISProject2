@@ -48,14 +48,13 @@ public class BackToMenuServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Users login = conta.devolverPorId(session.getAttribute("user").toString());
     	if(login != null){
-            request.setAttribute("user", login.getUser()); /*Sem sentido*/
-            request.setAttribute("nome", login.getNome()); /*Sem sentido*/
-            //response.sendRedirect(request.getContextPath() + "/sessao/paginainicial.jsp");
-            /*TODO Abrir servlet em vez de pagina para it para a pagina inicial*/
-            request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
+            request.setAttribute("user", login.getUser());
+            request.setAttribute("nome", login.getNome());
+            request.setAttribute("error", "");
+            request.getRequestDispatcher("/sessao/menuprincipal.jsp").forward(request, response);
     	}else{
-    		//request.setAttribute("message", "User não valido");
-    		//request.getRequestDispatcher("/index.jsp").forward(request, response);
+    		request.setAttribute("error", "Por algum problema aconteceu SignOut");
+    		request.getRequestDispatcher("/index.jsp").forward(request, response);
     	}
 	}
 

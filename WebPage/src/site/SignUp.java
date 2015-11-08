@@ -51,7 +51,7 @@ public class SignUp extends HttpServlet {
         if(login.verifyRegister(username)){
         	if(password.equals(password2)){
             	if(login.registerUser(nome,username, password,email)){
-            		request.setAttribute("message", "Registo feito com sucesso");
+            		request.setAttribute("error", "Registo feito com sucesso");
             		request.getRequestDispatcher("index.jsp").forward(request, response);
             	}else{
             		request.setAttribute("error", "Erro: Problemas no registo");

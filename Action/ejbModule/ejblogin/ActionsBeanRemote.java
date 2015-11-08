@@ -4,7 +4,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface ActionsBeanRemote {
-	public void editProfile(String userid, String name, String mail, String password);
+	public boolean editProfile(String userid, String name, String mail, String password);
 	public void deleteProfile(String userid);
 	public void addPlaylist(String userid, String playlist_name);
 	public void editPlaylist(String userid, String playlist_name);

@@ -53,18 +53,18 @@ public class Login extends HttpServlet {
         	if(login != null){
         		HttpSession session = request.getSession();
                 session.setAttribute("user", login.getId());
-                request.setAttribute("user", login.getUser()); /*Sem sentido*/
-                request.setAttribute("nome", login.getNome()); /*Sem sentido*/
+                //request.setAttribute("user", login.getUser()); /*Sem sentido*/
+                //request.setAttribute("nome", login.getNome()); /*Sem sentido*/
                 //response.sendRedirect(request.getContextPath() + "/sessao/paginainicial.jsp");
                 /*TODO Abrir servlet em vez de pagina para it para a pagina inicial*/
-                request.getRequestDispatcher("/sessao/paginainicial.jsp").forward(request, response);
+                request.getRequestDispatcher("BackToMenuServlet").forward(request, response);
         	}else{
-        		request.setAttribute("message", "User não valido");
+        		request.setAttribute("error", "User não valido");
         		request.getRequestDispatcher("/index.jsp").forward(request, response);
         	}
             
         }else{
-        	request.setAttribute("message", "Username esta vazio");
+        	request.setAttribute("error", "Username esta vazio");
         	request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
         

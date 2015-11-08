@@ -22,7 +22,7 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void editProfile(String userid, String name, String mail, String password) {
+	public boolean editProfile(String userid, String name, String mail, String password) {
 		// Editar perfil do Utilizador
 		try{
 			String sql = "UPDATE Users u SET u.nome= :a, u.email= :c, u.password= :d WHERE u.id = :b";
@@ -32,8 +32,10 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue.setParameter("d", password);
 			queue.setParameter("b", Integer.parseInt(userid));
 			queue.executeUpdate();
+			return true;
 		}catch(Exception e){
 			//System.out.println("O ERRO ESTA AQUI: "+e);
+			return false;
 		}
 
 	}

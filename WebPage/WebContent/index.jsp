@@ -19,7 +19,7 @@
 			<input type="submit" value="SignUp">
 		</form>
 
-		<p>${message}</p>
+		<p>${error}</p>
 		<!-- Mensagem de erro -->
 
 	</div>
