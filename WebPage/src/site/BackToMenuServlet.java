@@ -37,6 +37,11 @@ public class BackToMenuServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		/*if(request.getSession() != null || request.getSession().getAttribute("user") != null){
+			doPost(request, response);
+		}else{
+			response.sendRedirect("index.jsp");
+		}*/
 	}
 
 	/**

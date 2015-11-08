@@ -44,12 +44,12 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
         String password = request.getParameter("password");
         
         /* ainda posso melhorar*/
-        if(!username.equals("")){
-        	Users login = conta.loginUser(username, password);
+        if(!email.equals("")){
+        	Users login = conta.loginUser(email, password);
         	if(login != null){
         		HttpSession session = request.getSession();
                 session.setAttribute("user", login.getId());

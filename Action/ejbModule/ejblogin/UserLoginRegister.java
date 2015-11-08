@@ -17,9 +17,10 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 
 
 	public UserLoginRegister() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
+	@Override
 	public boolean registerUser(String nome, String user, String password, String email){
 		Users novaconta = new Users(nome, user, password, email);
 		try{
@@ -32,10 +33,11 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 
 	}
 
-	public boolean verifyRegister(String user){
+	@Override
+	public boolean verifyRegister(String email){
 		try{
-			javax.persistence.Query q = cursor.createQuery("from Users u where u.username = :t");
-			q.setParameter("t", user);
+			javax.persistence.Query q = cursor.createQuery("from Users u where u.email = :t");
+			q.setParameter("t", email);
 
 			@SuppressWarnings("all")
 			Users conta = (Users) q.getSingleResult();
@@ -53,11 +55,12 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 		}
 	}
 
-	public Users loginUser(String user, String password){
+	@Override
+	public Users loginUser(String email, String password){
 		try{
-			javax.persistence.Query q = cursor.createQuery("from Users u where u.username = :t"
+			javax.persistence.Query q = cursor.createQuery("from Users u where u.email = :t"
 					+ " and password = :p");
-			q.setParameter("t", user);
+			q.setParameter("t", email);
 			q.setParameter("p", password);
 
 			@SuppressWarnings("all")
@@ -69,6 +72,7 @@ public class UserLoginRegister implements UserLoginRegisterRemote {
 		}
 	}
 
+	@Override
 	public Users devolverPorId(String id){
 		javax.persistence.Query q = cursor.createQuery("from Users u where u.id = :t");
 		q.setParameter("t", Integer.parseInt(id));

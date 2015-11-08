@@ -18,7 +18,7 @@ public class ActionsBean implements ActionsBeanRemote {
 	 * Default constructor. 
 	 */
 	public ActionsBean() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -41,9 +41,20 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void deleteProfile(String userid) {
+	public boolean deleteProfile(String userid) {
 		// Apagar Perfil de Utilizador
-
+		
+		//TODO NAO ESTA COMPLETO!!!!
+		try{
+			String sql = "DELETE FROM Users u WHERE u.id = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("b", Integer.parseInt(userid));
+			queue.executeUpdate();
+			return true;
+		}catch(Exception e){
+			//System.out.println("O ERRO ESTA AQUI: "+e);
+			return false;
+		}
 	}
 
 	@Override

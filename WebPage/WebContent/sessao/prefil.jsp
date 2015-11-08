@@ -14,7 +14,7 @@
 		<p>Password: <input type="password" name="password" value="${password}"> </p>
 		<input type="submit" value="Salvar">
 	</form>
-	<form action="DeletePrefilServlet">
+	<form action="DeletePrefilServlet" method="post">
 		<input type="submit" value="Apagar conta">
 	</form>
 	<form action="BackToMenuServlet" method="post">

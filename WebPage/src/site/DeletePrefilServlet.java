@@ -45,9 +45,14 @@ public class DeletePrefilServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		conta.deleteProfile(session.getAttribute("user").toString());
-		session.invalidate();
-		response.sendRedirect("index.jsp");
+		if(conta.deleteProfile(session.getAttribute("user").toString())){
+			session.invalidate();
+			response.sendRedirect("index.jsp");
+		}else{
+			request.setAttribute("error", "Error: Utilizador nao apagado");
+    		request.getRequestDispatcher("/prefil.jsp").forward(request, response);
+		}
+		
 	}
 
 }

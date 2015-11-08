@@ -48,7 +48,7 @@ public class SignUp extends HttpServlet {
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
 
-        if(login.verifyRegister(username)){
+        if(login.verifyRegister(email)){
         	if(password.equals(password2)){
             	if(login.registerUser(nome,username, password,email)){
             		request.setAttribute("error", "Registo feito com sucesso");
@@ -63,7 +63,7 @@ public class SignUp extends HttpServlet {
             	request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
         }else{
-        	request.setAttribute("error", "Erro: User ja existe");
+        	request.setAttribute("error", "Erro: Email ja existe");
         	request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
 	}
