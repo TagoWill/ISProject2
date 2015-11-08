@@ -11,10 +11,13 @@
 	<p>Bem-vindo ${nome} de user ${user}</p>
 
 	<form action="">
-		<input type="submit" value="PlayLists">
+		<input type="submit" value="My PlayLists">
 	</form>
 	<form action="">
-		<input type="submit" value="Musics">
+		<input type="submit" value="My Musics">
+	</form>
+	<form action="">
+		<input type="submit" value="Search">
 	</form>
 	<form action="Prefil" method="post">
 		<input type="submit" value="Prefil">
