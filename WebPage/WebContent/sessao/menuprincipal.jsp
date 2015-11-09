@@ -10,7 +10,7 @@
 
 	<p>Bem-vindo ${nome} de user ${user}</p>
 
-	<form action="">
+	<form action="GoToPlaylist" method="post">
 		<input type="submit" value="My PlayLists">
 	</form>
 	<form action="">

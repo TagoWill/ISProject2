@@ -1,9 +1,15 @@
 package ejblogin;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import data.Music;
+import data.Playlist;
+import ligacao.Users;
 
 /**
  * Session Bean implementation class ActionsBean
@@ -18,7 +24,7 @@ public class ActionsBean implements ActionsBeanRemote {
 	 * Default constructor. 
 	 */
 	public ActionsBean() {
-		
+
 	}
 
 	@Override
@@ -34,7 +40,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue.executeUpdate();
 			return true;
 		}catch(Exception e){
-			//System.out.println("O ERRO ESTA AQUI: "+e);
+			System.out.println("Erro editProfile: "+e);
 			return false;
 		}
 
@@ -43,7 +49,7 @@ public class ActionsBean implements ActionsBeanRemote {
 	@Override
 	public boolean deleteProfile(String userid) {
 		// Apagar Perfil de Utilizador
-		
+
 		//TODO NAO ESTA COMPLETO!!!!
 		try{
 			String sql = "DELETE FROM Users u WHERE u.id = :b";
@@ -52,15 +58,30 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue.executeUpdate();
 			return true;
 		}catch(Exception e){
-			//System.out.println("O ERRO ESTA AQUI: "+e);
+			System.out.println("Erro deleteProfile: "+e);
 			return false;
 		}
 	}
 
 	@Override
-	public void addPlaylist(String userid, String playlist_name) {
+	public boolean addPlaylist(Users userid, String playlist_name) {
 		// As a	user, I	want to	create new playlists and assign	them a name
-
+		try{
+			String sql = "FROM Playlist p WHERE p.playlist_name = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("b", playlist_name);
+			List entities = queue.getResultList();
+			if(entities.size()>0){
+				return false;
+			}else{
+				Playlist novaplaylist = new Playlist(userid, playlist_name, null);
+				Cursor.persist(novaplaylist);
+				return true;
+			}
+		}catch(Exception e){
+			System.out.println("Erro addPlaylist: "+e);
+			return false;
+		}
 	}
 
 	@Override
@@ -76,9 +97,24 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void listMyPlaylists(String userid, String order) {
+	public List<Playlist> listMyPlaylists(Users userid, String order) {
 		// As a user, I	want to	list my	playlists in ascending or descending order.
-
+		try{
+			String sql;
+			if(order.equals("ASC"))
+				sql = "FROM Playlist p WHERE p.user = :a ORDER BY p.playlist_name ASC";
+			else
+				sql = "FROM Playlist p WHERE p.user = :a ORDER BY p.playlist_name DESC";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", userid);
+			//queue.setParameter("b", order);
+			@SuppressWarnings("unchecked")
+			List<Playlist> list = queue.getResultList();
+			return list;
+		}catch(Exception e){
+			System.out.println("Erro listMyPlaylist: "+e);
+			return null;
+		}
 	}
 
 	@Override

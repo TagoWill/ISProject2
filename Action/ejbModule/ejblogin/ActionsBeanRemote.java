@@ -1,15 +1,20 @@
 package ejblogin;
 
+import java.util.List;
+
 import javax.ejb.Remote;
+
+import data.Playlist;
+import ligacao.Users;
 
 @Remote
 public interface ActionsBeanRemote {
 	public boolean editProfile(String userid, String name, String mail, String password);
 	public boolean deleteProfile(String userid);
-	public void addPlaylist(String userid, String playlist_name);
+	public boolean addPlaylist(Users userid, String playlist_name);
 	public void editPlaylist(String userid, String playlist_name);
 	public void deletePlaylist(String userid, String playlist_name);
-	public void listMyPlaylists(String userid, String order);
+	public List<Playlist> listMyPlaylists(Users userid, String order);
 	public void listMyMusicFiles(String userid, String playlist_name);
 	public void addMusicFileToPlaylist(String userid, String playlist_name);
 	public void deleteMusicFileFromPlaylist(String userid, String playlist_name);

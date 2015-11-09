@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p></p>
+	<form action="LogOut" method="post">
+		<input type="submit" value="LogOut">
+	</form>
+	p></p>
 	<form action="EditarPrefilSevlet" method="post">
 		<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
 		<p>User: ${user} </p>
