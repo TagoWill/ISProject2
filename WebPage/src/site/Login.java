@@ -28,7 +28,6 @@ public class Login extends HttpServlet {
      */
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,8 +40,7 @@ public class Login extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}else{
-			System.out.println("Cheguei aqui");
-			request.getRequestDispatcher("BackToMenuServlet").forward(request, response);
+			request.getRequestDispatcher("GoToMenuPrincipal").forward(request, response);
 		}
 	}
 
@@ -61,7 +59,7 @@ public class Login extends HttpServlet {
         	if(login != null){
         		HttpSession session = request.getSession();
                 session.setAttribute("user", login.getId());
-                request.getRequestDispatcher("BackToMenuServlet").forward(request, response);
+                request.getRequestDispatcher("GoToMenuPrincipal").forward(request, response);
         	}else{
         		request.setAttribute("error", "User não valido");
         		request.getRequestDispatcher("/index.jsp").forward(request, response);

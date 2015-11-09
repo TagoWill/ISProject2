@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class GoToMusic
+ * Servlet implementation class GoToInfoMusic
  */
-@WebServlet("/GoToMusic")
-public class GoToMusic extends HttpServlet {
+@WebServlet("/GoToInfoMusic")
+public class GoToInfoMusic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoToMusic() {
+    public GoToInfoMusic() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,8 +33,9 @@ public class GoToMusic extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
-			request.getRequestDispatcher("/sessao/menumusic.jsp").forward(request, response);
+			request.getRequestDispatcher("/sessao/infomusic.jsp").forward(request, response);
 		}
+		
 	}
 
 	/**
@@ -43,9 +44,6 @@ public class GoToMusic extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
-		/*ADICIONAR LISTAS*/
-		request.getRequestDispatcher("/sessao/menumusic.jsp").forward(request, response);
 	}
 
 }

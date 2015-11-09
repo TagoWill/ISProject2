@@ -22,7 +22,7 @@
 	<form action="DeletePrefilServlet" method="post">
 		<input type="submit" value="Apagar conta">
 	</form>
-	<form action="BackToMenuServlet" method="post">
+	<form action="GoToMenuPrincipal">
 		<input type="submit" value="Back">
 	</form>
 	

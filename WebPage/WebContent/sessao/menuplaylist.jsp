@@ -38,7 +38,7 @@
 		<input type="text" name="listname"> <input type="submit"
 			value="Create new Playlist">
 	</form>
-	<form action="BackToMenuServlet" method="post">
+	<form action="GoToMenuPrincipal">
 		<input type="submit" value="Back">
 	</form>
 
