@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import ejblogin.ActionsBeanRemote;
 import ligacao.Users;
+import sun.awt.RepaintArea;
 
 /**
  * Servlet implementation class Login
@@ -36,6 +37,13 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession(false);
+		if(session == null || session.getAttribute("user") == null){
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}else{
+			System.out.println("Cheguei aqui");
+			request.getRequestDispatcher("BackToMenuServlet").forward(request, response);
+		}
 	}
 
 	/**

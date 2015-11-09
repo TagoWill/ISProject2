@@ -13,13 +13,13 @@
 	<form action="GoToPlaylist" method="post">
 		<input type="submit" value="My PlayLists">
 	</form>
-	<form action="">
+	<form action="GoToMusic" method="post">
 		<input type="submit" value="My Musics">
 	</form>
-	<form action="">
+	<form action="GoToSearch" method="post">
 		<input type="submit" value="Search">
 	</form>
-	<form action="Prefil" method="post">
+	<form action="GoToProfile" method="post">
 		<input type="submit" value="Prefil">
 	</form>
 	<form action="LogOut" method="post">

@@ -12,7 +12,7 @@
 		<input type="submit" value="LogOut">
 	</form>
 	<p></p>
-	<form action="EditarPrefilSevlet" method="post">
+	<form action="EditProfile" method="post">
 		<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
 		<p>User: ${user} </p>
 		<p>Email: <input type="text" name="email" value="${email}"> </p>

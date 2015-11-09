@@ -15,8 +15,8 @@ import ejblogin.ActionsBeanRemote;
 /**
  * Servlet implementation class EditarPrefilSevlet
  */
-@WebServlet("/EditarPrefilSevlet")
-public class EditarPrefilSevlet extends HttpServlet {
+@WebServlet("/EditProfile")
+public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
@@ -25,7 +25,7 @@ public class EditarPrefilSevlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditarPrefilSevlet() {
+    public EditProfile() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +36,7 @@ public class EditarPrefilSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("GoToProfile").forward(request, response);
 	}
 
 	/**
@@ -50,12 +51,11 @@ public class EditarPrefilSevlet extends HttpServlet {
 		String password = request.getParameter("password");
 		if(action.editProfile(session.getAttribute("user").toString(), nome, email, password)){
 			request.setAttribute("error", "Salvo");
-			request.getRequestDispatcher("Prefil").forward(request, response);
 		}else{
 			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
-			request.getRequestDispatcher("Prefil").forward(request, response);
 		}
 		
+		request.getRequestDispatcher("GoToProfile").forward(request, response);
 		
 	}
 

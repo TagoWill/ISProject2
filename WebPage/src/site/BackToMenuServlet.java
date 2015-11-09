@@ -37,11 +37,21 @@ public class BackToMenuServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		/*if(request.getSession() != null || request.getSession().getAttribute("user") != null){
-			doPost(request, response);
+		HttpSession session = request.getSession();
+		if(session != null || session.getAttribute("user") != null){
+			Users login = action.devolverPorId(session.getAttribute("user").toString());
+	    	if(login != null){
+	            request.setAttribute("user", login.getUser());
+	            request.setAttribute("nome", login.getNome());
+	            request.setAttribute("error", "");
+	            request.getRequestDispatcher("/sessao/menuprincipal.jsp").forward(request, response);
+	    	}else{
+	    		request.setAttribute("error", "Por algum problema aconteceu SignOut");
+	    		request.getRequestDispatcher("/index.jsp").forward(request, response);
+	    	}
 		}else{
 			response.sendRedirect("index.jsp");
-		}*/
+		}
 	}
 
 	/**

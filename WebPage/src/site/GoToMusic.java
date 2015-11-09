@@ -1,10 +1,6 @@
 package site;
 
 import java.io.IOException;
-
-import javax.ejb.EJB;
-import ejblogin.ActionsBeanRemote;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,19 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CreatePlaylist
+ * Servlet implementation class GoToMusic
  */
-@WebServlet("/CreatePlaylist")
-public class CreatePlaylist extends HttpServlet {
+@WebServlet("/GoToMusic")
+public class GoToMusic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	
-	@EJB
-	ActionsBeanRemote action;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreatePlaylist() {
+    public GoToMusic() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +28,6 @@ public class CreatePlaylist extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("GoToPlaylist").forward(request, response);
 	}
 
 	/**
@@ -44,13 +36,9 @@ public class CreatePlaylist extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		if(action.addPlaylist(request.getSession().getAttribute("user").toString()  , request.getParameter("listname"))){
-			request.setAttribute("error", "Playlist created");
-		}else{
-			request.setAttribute("error", "Error: Cannot create playlist");
-		}
 		
-		request.getRequestDispatcher("GoToPlaylist").forward(request, response);
+		/*ADICIONAR LISTAS*/
+		request.getRequestDispatcher("/sessao/menumusic.jsp").forward(request, response);
 	}
 
 }
