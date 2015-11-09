@@ -53,14 +53,7 @@ public class GoToProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Users login = action.devolverPorId(session.getAttribute("user").toString());
-		request.setAttribute("nome", login.getNome());
-		request.setAttribute("user", login.getUser());
-		request.setAttribute("email", login.getEmail());
-		request.setAttribute("password", login.getPassword());
-		//response.sendRedirect(request.getContextPath() + "/sessao/prefil.jsp");
-		request.getRequestDispatcher("/sessao/menuprofile.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

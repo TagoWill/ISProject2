@@ -10,19 +10,19 @@
 
 	<p>Bem-vindo ${nome} de user ${user}</p>
 
-	<form action="GoToPlaylist" method="post">
+	<form action="GoToPlaylist" >
 		<input type="submit" value="My PlayLists">
 	</form>
-	<form action="GoToMusic" method="post">
+	<form action="GoToMusic" >
 		<input type="submit" value="My Musics">
 	</form>
-	<form action="GoToSearch" method="post">
+	<form action="GoToSearch" >
 		<input type="submit" value="Search">
 	</form>
-	<form action="GoToProfile" method="post">
+	<form action="GoToProfile" >
 		<input type="submit" value="Prefil">
 	</form>
-	<form action="LogOut" method="post">
+	<form action="LogOut" >
 		<input type="submit" value="LogOut">
 	</form>
 </body>

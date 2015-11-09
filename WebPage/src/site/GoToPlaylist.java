@@ -66,25 +66,8 @@ public class GoToPlaylist extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		//String order = request.getAttribute("order").toString();
-		String order;
-		if(request == null || request.getAttribute("order")==null){
-			request.setAttribute("order", "ASC");
-			order = "ASC";
-		}else{
-			order = request.getAttribute("order").toString();
-		}
-		List<Playlist> lists = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), order);
-
-		if(lists!=null){
-			request.setAttribute("lists", lists);
-		}else{
-			request.setAttribute("error", "Error: Cannot list playlist");
-		}
-		
-		request.getRequestDispatcher("/sessao/menuplaylist.jsp").forward(request, response);
-		
+		doGet(request, response);
+				
 	}
 
 }
