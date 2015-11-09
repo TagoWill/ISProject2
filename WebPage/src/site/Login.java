@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejblogin.UserLoginRegisterRemote;
+import ejblogin.ActionsBeanRemote;
 import ligacao.Users;
 
 /**
@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
-	UserLoginRegisterRemote conta;
+	ActionsBeanRemote action;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
         
         /* ainda posso melhorar*/
         if(!email.equals("")){
-        	Users login = conta.loginUser(email, password);
+        	Users login = action.loginUser(email, password);
         	if(login != null){
         		HttpSession session = request.getSession();
                 session.setAttribute("user", login.getId());

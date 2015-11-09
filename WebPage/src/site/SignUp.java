@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ejblogin.UserLoginRegisterRemote;
+import ejblogin.ActionsBeanRemote;
 
 /**
  * Servlet implementation class Login
@@ -19,7 +19,7 @@ public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
-	UserLoginRegisterRemote login;
+	ActionsBeanRemote conta;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,9 +48,9 @@ public class SignUp extends HttpServlet {
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
 
-        if(login.verifyRegister(email)){
+        if(conta.verifyRegister(email)){
         	if(password.equals(password2)){
-            	if(login.registerUser(nome,username, password,email)){
+            	if(conta.registerUser(nome,username, password,email)){
             		request.setAttribute("error", "Registo feito com sucesso");
             		request.getRequestDispatcher("index.jsp").forward(request, response);
             	}else{

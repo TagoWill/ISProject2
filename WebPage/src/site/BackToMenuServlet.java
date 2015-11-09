@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejblogin.UserLoginRegisterRemote;
+import ejblogin.ActionsBeanRemote;
 import ligacao.Users;
 
 /**
@@ -21,7 +21,7 @@ public class BackToMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	UserLoginRegisterRemote conta;
+	ActionsBeanRemote action;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,7 +51,7 @@ public class BackToMenuServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		Users login = conta.devolverPorId(session.getAttribute("user").toString());
+		Users login = action.devolverPorId(session.getAttribute("user").toString());
     	if(login != null){
             request.setAttribute("user", login.getUser());
             request.setAttribute("nome", login.getNome());

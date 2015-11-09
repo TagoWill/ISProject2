@@ -31,6 +31,7 @@ public class Users implements Serializable {
 	@OneToMany (mappedBy="user")
 	private List<Playlist> playlist;
 
+
 	public Users() {
 		super();
 	}
@@ -72,6 +73,14 @@ public class Users implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<Playlist> getPlaylist() {
+		return playlist;
+	}
+
+	public void setPlaylist(List<Playlist> playlist) {
+		this.playlist = playlist;
 	}
 
 	public int getId() {

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.Playlist;
 import ejblogin.ActionsBeanRemote;
-import ejblogin.UserLoginRegisterRemote;
 
 /**
  * Servlet implementation class GoToPlaylist
@@ -24,8 +23,6 @@ public class GoToPlaylist extends HttpServlet {
 	
 	@EJB
 	ActionsBeanRemote action;
-	@EJB
-	UserLoginRegisterRemote conta;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -57,7 +54,7 @@ public class GoToPlaylist extends HttpServlet {
 		}else{
 			order = request.getAttribute("order").toString();
 		}
-		List<Playlist> lists = action.listMyPlaylists(conta.devolverPorId(request.getSession().getAttribute("user").toString()), order);
+		List<Playlist> lists = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), order);
 
 		if(lists!=null){
 			request.setAttribute("lists", lists);

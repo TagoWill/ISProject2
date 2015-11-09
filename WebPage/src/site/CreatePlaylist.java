@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import ejblogin.ActionsBeanRemote;
-import ejblogin.UserLoginRegisterRemote;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +21,6 @@ public class CreatePlaylist extends HttpServlet {
 	
 	@EJB
 	ActionsBeanRemote action;
-	@EJB
-	UserLoginRegisterRemote conta;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,7 +43,7 @@ public class CreatePlaylist extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		if(action.addPlaylist(conta.devolverPorId(request.getSession().getAttribute("user").toString())  , request.getParameter("listname"))){
+		if(action.addPlaylist(request.getSession().getAttribute("user").toString()  , request.getParameter("listname"))){
 			request.setAttribute("error", "Playlist created");
 		}else{
 			request.setAttribute("error", "Error: Cannot create playlist");

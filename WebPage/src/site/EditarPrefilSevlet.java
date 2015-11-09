@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejblogin.ActionsBean;
+import ejblogin.ActionsBeanRemote;
 
 /**
  * Servlet implementation class EditarPrefilSevlet
@@ -21,7 +21,7 @@ public class EditarPrefilSevlet extends HttpServlet {
        
 	
 	@EJB
-	ActionsBean conta;
+	ActionsBeanRemote action;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,7 +48,7 @@ public class EditarPrefilSevlet extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		if(conta.editProfile(session.getAttribute("user").toString(), nome, email, password)){
+		if(action.editProfile(session.getAttribute("user").toString(), nome, email, password)){
 			request.setAttribute("error", "Salvo");
 			request.getRequestDispatcher("Prefil").forward(request, response);
 		}else{

@@ -4,6 +4,8 @@
 	   <provider>org.hibernate.ejb.HibernatePersistence</provider>
   <jta-data-source>java:/PlaylistMusicEAR</jta-data-source>
   <class>ligacao.Users</class>
+  <class>data.Playlist</class>
+  <class>data.Music</class>
   <properties>
    <property name="javax.persistence.jdbc.user" value="root" />
    <property name="javax.persistence.jdbc.password" value="" />

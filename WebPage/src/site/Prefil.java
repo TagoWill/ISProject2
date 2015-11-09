@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejblogin.UserLoginRegisterRemote;
+import ejblogin.ActionsBeanRemote;
 import ligacao.Users;
 /**
  * Servlet implementation class Prefil
@@ -20,7 +20,7 @@ public class Prefil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
-	UserLoginRegisterRemote conta;
+	ActionsBeanRemote action;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +42,7 @@ public class Prefil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Users login = conta.devolverPorId(session.getAttribute("user").toString());
+		Users login = action.devolverPorId(session.getAttribute("user").toString());
 		request.setAttribute("nome", login.getNome());
 		request.setAttribute("user", login.getUser());
 		request.setAttribute("email", login.getEmail());

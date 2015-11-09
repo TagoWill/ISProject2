@@ -44,7 +44,7 @@ public class DeletePlaylist extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
-		if(action.deletePlaylist(request.getParameter("getid"))){
+		if(action.deletePlaylistCommit(request.getParameter("getid"))){
 			request.setAttribute("error", "Apagado");
 		}else{
 			request.setAttribute("error", "Cannot delete");
