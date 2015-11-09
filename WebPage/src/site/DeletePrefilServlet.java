@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ejblogin.ActionsBeanRemote;
+import ejblogin.UserLoginRegisterRemote;
 
 /**
  * Servlet implementation class DeletePrefilServlet
@@ -21,7 +22,9 @@ public class DeletePrefilServlet extends HttpServlet {
        
 	
 	@EJB
-	ActionsBeanRemote conta;
+	ActionsBeanRemote action;
+	@EJB
+	UserLoginRegisterRemote conta;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -45,12 +48,13 @@ public class DeletePrefilServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		if(conta.deleteProfile(session.getAttribute("user").toString())){
+		
+		if(action.deleteProfile(conta.devolverPorId(session.getAttribute("user").toString()))){
 			session.invalidate();
 			response.sendRedirect("index.jsp");
 		}else{
 			request.setAttribute("error", "Error: Utilizador nao apagado");
-    		request.getRequestDispatcher("/prefil.jsp").forward(request, response);
+    		request.getRequestDispatcher("/sessao/prefil.jsp").forward(request, response);
 		}
 		
 	}

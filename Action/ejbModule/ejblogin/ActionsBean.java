@@ -47,15 +47,23 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public boolean deleteProfile(String userid) {
+	public boolean deleteProfile(Users userid) {
 		// Apagar Perfil de Utilizador
 
 		//TODO NAO ESTA COMPLETO!!!!
+		String sql;
+		javax.persistence.Query queue;
 		try{
-			String sql = "DELETE FROM Users u WHERE u.id = :b";
-			javax.persistence.Query queue = Cursor.createQuery(sql);
-			queue.setParameter("b", Integer.parseInt(userid));
+			sql = "DELETE FROM Playlist p WHERE p.user = :b";
+			queue = Cursor.createQuery(sql);
+			queue.setParameter("b", userid);
 			queue.executeUpdate();
+			
+			sql = "DELETE FROM Users u WHERE u.id = :b";
+			queue = Cursor.createQuery(sql);
+			queue.setParameter("b", userid.getId());
+			queue.executeUpdate();
+			
 			return true;
 		}catch(Exception e){
 			System.out.println("Erro deleteProfile: "+e);
@@ -85,15 +93,24 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void editPlaylist(String userid, String playlist_name) {
+	public void editPlaylist(String playlistid, String playlist_name) {
 		// As a	user, I	want to	edit the name of the playlists.
 
 	}
 
 	@Override
-	public void deletePlaylist(String userid, String playlist_name) {
+	public boolean deletePlaylist(String playlistid) {
 		// As a	user, I	want to	be able	to delete a	playlist. Deleting a playlist should not delete	the	associated music.
-
+		try{
+			String sql = "DELETE FROM Playlist p WHERE p.id = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("b", Integer.parseInt(playlistid));
+			queue.executeUpdate();
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro deleteProfile: "+e);
+			return false;
+		}
 	}
 
 	@Override

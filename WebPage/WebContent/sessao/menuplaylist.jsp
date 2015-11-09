@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,17 +15,23 @@
 	<p></p>
 	My Playlist:
 	<p />
-	<td><form action="OrderASC" method="post">
+	<form action="OrderASC" method="post">
 		<input type="submit" value="Asc">
-	</form></td>
-	<td><form action="OrderDESC" method="post">
+	</form>
+	<form action="OrderDESC" method="post">
 		<input type="submit" value="Desc">
-	</form></td>
+	</form>
 	<table>
 		<c:forEach items="${lists}" var="list">
 			<tr>
-				<td><c:out value="${list.getPlaylistName()}" /></td>
-			</tr>
+				<td>${list.getPlaylistName()}</td>
+				<td><form action="DeletePlaylist" method="post">
+						<input type="hidden" name="getid" value="${list.getId()}" /> <input
+							type="submit" name="teste" value="Delete">
+					</form></td>
+			<!-- <td><c:out value="${list.getPlaylistName()}" /></td>
+				<td><href="${list.getPlaylistName()} value="Delete" /></td>  -->
+				</tr>
 		</c:forEach>
 	</table>
 	<form action="CreatePlaylist" method="post">

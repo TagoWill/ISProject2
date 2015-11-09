@@ -19,6 +19,7 @@ public class Playlist implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
 	@ManyToOne
 	private Users user;
 	private String playlist_name;
@@ -33,6 +34,14 @@ public class Playlist implements Serializable {
 		this.setUser(user);
 		this.setPlaylistName(playlist_name);
 		this.setPlaylistSongs(song);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
    
 	public Users getUser() {

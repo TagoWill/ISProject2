@@ -14,7 +14,7 @@ import data.Playlist;
  */
 @Entity
 
-@SequenceGenerator(name="seq", initialValue=2, allocationSize=100)
+@SequenceGenerator(name="seq", initialValue=2, allocationSize=1000)
 public class Users implements Serializable {
 
 	private static final long serialVersionUID = 1L;
