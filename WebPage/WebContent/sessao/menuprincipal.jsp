@@ -20,7 +20,7 @@
 		<input type="submit" value="Search">
 	</form>
 	<form action="GoToProfile" >
-		<input type="submit" value="Prefil">
+		<input type="submit" value="Profile">
 	</form>
 	<form action="LogOut" >
 		<input type="submit" value="LogOut">

@@ -16,7 +16,7 @@
 		<p>Title: <input name="title" type="text" value="${music.title}"></p>
 		<p>Artist: <input name="artist" type="text" value="${music.artist}"></p>
 		<p>Album: <input name="album" type="text" value="${music.album}"></p>
-		<p>Path: <input name="path" type="text" value="${music.path}"></p>
+		<input type="file" name="file" size="50" />
 		<input type="submit" value="Upload">
 	</form>
 </body>
