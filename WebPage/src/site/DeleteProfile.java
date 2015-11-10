@@ -15,8 +15,8 @@ import ejblogin.ActionsBeanRemote;
 /**
  * Servlet implementation class DeletePrefilServlet
  */
-@WebServlet("/DeletePrefilServlet")
-public class DeletePrefilServlet extends HttpServlet {
+@WebServlet("/DeleteProfile")
+public class DeleteProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
@@ -25,7 +25,7 @@ public class DeletePrefilServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeletePrefilServlet() {
+    public DeleteProfile() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -23,7 +23,7 @@ public interface ActionsBeanRemote {
 	public void listMyMusicFiles(String userid, String playlist_name);
 	public void addMusicFileToPlaylist(String userid, String playlist_name);
 	public void deleteMusicFileFromPlaylist(String userid, String playlist_name);
-	public void addMusicFile(String userid, String title, String artist, String album, String year, String path);
+	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path);
 	public void editMusicFile(String userid, String title, String artist, String album, String year, String path);
 	public void detachFromMusic(String userid, String title);
 	public void listAllMusic(String userid);

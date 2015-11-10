@@ -310,9 +310,24 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void addMusicFile(String userid, String title, String artist, String album, String year, String path) {
+	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path) {
 		// As a	user, I	want to	add	new	music to the application, identifying the title, artist, album, year and path to the file to upload	to the server.
-
+		try{
+			userTransaction.begin();
+			
+			
+			userTransaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("Error addMusicFile: "+e);
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return false;
+		}
 	}
 
 	@Override
