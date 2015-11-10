@@ -8,10 +8,6 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -28,20 +24,20 @@ public class ActionsBean implements ActionsBeanRemote {
 
 	@PersistenceContext(name = "Users")
 	EntityManager Cursor;
-	
+
 	@Resource
 	private UserTransaction userTransaction;
-	
+
 	/**
 	 * Default constructor. 
 	 */
 	public ActionsBean() {
 
 	}
-	
+
 	@Override
 	public boolean registerUser(String nome, String user, String password, String email){
-		
+
 		try{
 			userTransaction.begin();
 			Users novaconta = new Users(nome, user, password, email);
@@ -73,7 +69,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			@SuppressWarnings("all")
 			Users conta = (Users) q.getSingleResult();
 			//System.out.println("TESTE: "+teste.getUser());
-			
+
 			if(conta == null){
 				return true;
 			}else{
@@ -144,7 +140,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			}
 			return false;
 		}
-
 	}
 
 	@Override
@@ -154,22 +149,22 @@ public class ActionsBean implements ActionsBeanRemote {
 		//TODO NAO ESTA COMPLETO!!!!
 		String sql;
 		javax.persistence.Query queue;
-		
-		
+
+
 		try{
 			userTransaction.begin();
 			Users conta = devolverPorId(userid);
-			
+
 			for(Playlist list : conta.getPlaylist()){
-				deletePlaylist(Integer.toString(list.getId()));
+				deletePlaylist(Integer.toString(list.getId()), false);
 			}
-			
+
 			//CHAMAR FUNCAO
 			/*sql = "DELETE FROM Playlist p WHERE p.user = :b";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", conta);
 			queue.executeUpdate();*/
-			
+
 			sql = "DELETE FROM Users u WHERE u.id = :b";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", conta.getId());
@@ -193,7 +188,7 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a	user, I	want to	create new playlists and assign	them a name
 		try{
 			Users conta = devolverPorId(userid);
-			
+
 			String sql = "FROM Playlist p WHERE p.playlist_name = :b";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", playlist_name);
@@ -211,7 +206,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			System.out.println("Erro addPlaylist: "+e);
@@ -220,43 +214,56 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void editPlaylist(String playlistid, String playlist_name) {
+	public boolean editPlaylist(String playlistid, String playlist_name) {
 		// As a	user, I	want to	edit the name of the playlists.
-
-	}
-
-	@Override
-	public boolean deletePlaylistCommit(String playlistid) {
-		// As a	user, I	want to	be able	to delete a	playlist. Deleting a playlist should not delete	the	associated music.
-		try {
+		try{
 			userTransaction.begin();
-			boolean acontecimento = deletePlaylist(playlistid);
+			String sql = "UPDATE Playlist p SET p.playlist_name= :a WHERE p.id = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", playlist_name);
+			queue.setParameter("b", Integer.parseInt(playlistid));
+			queue.executeUpdate();
 			userTransaction.commit();
-			return acontecimento;
-		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro editProfile: "+e);
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			e.printStackTrace();
 			return false;
 		}
 	}
-	
+
 	@Override
-	public boolean deletePlaylist(String playlistid) {
+	public boolean deletePlaylist(String playlistid, boolean iscommit) {
 		// As a	user, I	want to	be able	to delete a	playlist. Deleting a playlist should not delete	the	associated music.
 		try{
+			if(iscommit == true)
+			{
+				userTransaction.begin();
+			}
 			String sql = "DELETE FROM Playlist p WHERE p.id = :b";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(playlistid));
 			queue.executeUpdate();
+			if(iscommit == true)
+			{
+				userTransaction.commit();
+			}
 			return true;
 		}catch(Exception e){
 			System.out.println("Erro deleteProfile: "+e);
+			if(iscommit == true)
+			{
+				try {
+					userTransaction.rollback();
+				} catch (IllegalStateException | SecurityException | SystemException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 			return false;
 		}
 	}
@@ -266,7 +273,7 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a user, I	want to	list my	playlists in ascending or descending order.
 		try{
 			Users conta = devolverPorId(userid);
-			
+
 			String sql;
 			if(order.equals("ASC"))
 				sql = "FROM Playlist p WHERE p.user = :a ORDER BY p.playlist_name ASC";
