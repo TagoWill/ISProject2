@@ -182,6 +182,18 @@ public class ActionsBean implements ActionsBeanRemote {
 			return false;
 		}
 	}
+	
+	@Override
+	public Playlist getPlaylistName(String playlistid) {
+		javax.persistence.Query q = Cursor.createQuery("FROM Playlist p WHERE p.id = :i");
+		q.setParameter("i", Integer.parseInt(playlistid));
+		try{
+			Playlist conta = (Playlist) q.getSingleResult();
+			return conta;
+		}catch(Exception e){
+			return null;
+		}
+	}
 
 	@Override
 	public boolean addPlaylist(String userid, String playlist_name) {
@@ -226,7 +238,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			userTransaction.commit();
 			return true;
 		}catch(Exception e){
-			System.out.println("Erro editProfile: "+e);
+			System.out.println("Erro editPlaylist: "+e);
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
