@@ -17,9 +17,8 @@ public interface ActionsBeanRemote {
 	public boolean editProfile(String userid, String name, String mail, String password);
 	public boolean deleteProfile(String userid);
 	public boolean addPlaylist(String userid, String playlist_name);
-	public void editPlaylist(String playlistid, String playlist_name);
-	public boolean deletePlaylistCommit(String playlistid);
-	public boolean deletePlaylist(String playlistid);
+	public boolean editPlaylist(String playlistid, String playlist_name);
+	public boolean deletePlaylist(String playlistid, boolean iscommit);
 	public List<Playlist> listMyPlaylists(String userid, String order);
 	public void listMyMusicFiles(String userid, String playlist_name);
 	public void addMusicFileToPlaylist(String userid, String playlist_name);
