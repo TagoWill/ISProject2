@@ -24,7 +24,7 @@
 	<table>
 		<c:forEach items="${lists}" var="list">
 			<tr>
-				<td>${list.getPlaylistName()}</td>
+				<td><a href="GoToInfoPlaylist?playlist_id=${list.getId()}">${list.getPlaylistName()}</a></td>
 				<td><form action="DeletePlaylist" method="post">
 						<input type="hidden" name="getid" value="${list.getId()}" /> <input
 							type="submit" name="teste" value="Delete">
