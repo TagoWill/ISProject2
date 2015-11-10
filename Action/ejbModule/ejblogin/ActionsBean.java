@@ -325,9 +325,10 @@ public class ActionsBean implements ActionsBeanRemote {
 	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path) {
 		// As a	user, I	want to	add	new	music to the application, identifying the title, artist, album, year and path to the file to upload	to the server.
 		try{
+			Users conta = devolverPorId(userid);
 			userTransaction.begin();
-			
-			
+			Music novamusica = new Music(conta, title, artist, album, year, path);
+			Cursor.persist(novamusica);
 			userTransaction.commit();
 			return true;
 		}catch(Exception e){
