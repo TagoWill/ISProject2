@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import ejblogin.ActionsBeanRemote;
 import ligacao.Users;
-import sun.awt.RepaintArea;
 
 /**
  * Servlet implementation class Login

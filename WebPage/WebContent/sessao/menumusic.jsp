@@ -7,11 +7,15 @@
 <title>My Music</title>
 </head>
 <body>
+	<form action="LogOut">
+		<input type="submit" value="LogOut">
+	</form>
+	<p></p>
 	A Minha musica
-
+	<p></p>
 	<form action="GoToInfoMusic">
 		<input type="submit" value="Add Music">
 	</form>
-	
+
 </body>
 </html>

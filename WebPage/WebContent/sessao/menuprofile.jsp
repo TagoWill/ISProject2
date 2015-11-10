@@ -8,7 +8,7 @@
 </head>
 <body>
 	<p></p>
-	<form action="LogOut" method="post">
+	<form action="LogOut">
 		<input type="submit" value="LogOut">
 	</form>
 	<p></p>
