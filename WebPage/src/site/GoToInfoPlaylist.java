@@ -27,7 +27,6 @@ public class GoToInfoPlaylist extends HttpServlet {
      */
     public GoToInfoPlaylist() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

@@ -159,12 +159,6 @@ public class ActionsBean implements ActionsBeanRemote {
 				deletePlaylist(Integer.toString(list.getId()), false);
 			}
 
-			//CHAMAR FUNCAO
-			/*sql = "DELETE FROM Playlist p WHERE p.user = :b";
-			queue = Cursor.createQuery(sql);
-			queue.setParameter("b", conta);
-			queue.executeUpdate();*/
-
 			sql = "DELETE FROM Users u WHERE u.id = :b";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", conta.getId());
@@ -175,7 +169,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			System.out.println("Erro deleteProfile: "+e);
@@ -204,6 +197,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			String sql = "FROM Playlist p WHERE p.playlist_name = :b";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", playlist_name);
+			@SuppressWarnings("rawtypes")
 			List entities = queue.getResultList();
 			if(entities.size()>0){
 				return false;
@@ -272,7 +266,6 @@ public class ActionsBean implements ActionsBeanRemote {
 				try {
 					userTransaction.rollback();
 				} catch (IllegalStateException | SecurityException | SystemException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -302,9 +295,29 @@ public class ActionsBean implements ActionsBeanRemote {
 			return null;
 		}
 	}
+	
+	@Override
+	public List<Music> listMyMusicFiles(String userid, String order) {
+		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
+		try{
+			Users conta = devolverPorId(userid);
+
+			String sql;
+				sql = "FROM Music m WHERE m.user = :a ORDER BY m.title ASC";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", conta);
+			//queue.setParameter("b", order);
+			@SuppressWarnings("unchecked")
+			List<Music> list = queue.getResultList();
+			return list;
+		}catch(Exception e){
+			System.out.println("Erro listMyPlaylist: "+e);
+			return null;
+		}
+	}
 
 	@Override
-	public void listMyMusicFiles(String userid, String playlist_name) {
+	public void listMyMusicFilesByPlaylist(String userid, String playlist_name) {
 		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
 
 	}
@@ -336,7 +349,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			return false;

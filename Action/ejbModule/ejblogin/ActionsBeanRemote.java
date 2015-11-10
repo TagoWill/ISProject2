@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import data.Music;
 import data.Playlist;
 import ligacao.Users;
 
@@ -21,7 +22,8 @@ public interface ActionsBeanRemote {
 	public boolean editPlaylist(String playlistid, String playlist_name);
 	public boolean deletePlaylist(String playlistid, boolean iscommit);
 	public List<Playlist> listMyPlaylists(String userid, String order);
-	public void listMyMusicFiles(String userid, String playlist_name);
+	public List<Music> listMyMusicFiles(String userid, String order);
+	public void listMyMusicFilesByPlaylist(String userid, String playlist_name);
 	public void addMusicFileToPlaylist(String userid, String playlist_name);
 	public void deleteMusicFileFromPlaylist(String userid, String playlist_name);
 	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path);

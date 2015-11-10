@@ -39,6 +39,14 @@ public class Music implements Serializable {
 		this.setPath(path);
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public Users getUser() {
 		return user;
 	}

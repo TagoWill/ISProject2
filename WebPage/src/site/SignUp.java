@@ -25,15 +25,13 @@ public class SignUp extends HttpServlet {
      */
     public SignUp() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		request.getRequestDispatcher("/register.jsp").forward(request, response);
 	}
 
@@ -41,7 +39,7 @@ public class SignUp extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String username = request.getParameter("username");

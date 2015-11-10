@@ -27,14 +27,13 @@ public class UpLoadMusic extends HttpServlet {
      */
     public UpLoadMusic() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		HttpSession session = request.getSession();
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
@@ -47,12 +46,13 @@ public class UpLoadMusic extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		HttpSession session = request.getSession();
 		String title = request.getParameter("title");
 		String artist = request.getParameter("artist");
 		String album = request.getParameter("album");
 		String year = request.getParameter("year");
+		/*faltam coisas*/
 		if(action.addMusicFile(session.getAttribute("user").toString(), title, artist, album, year, "")){
 			request.setAttribute("error", "Salvo");
 		}else{

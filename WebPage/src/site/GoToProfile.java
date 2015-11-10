@@ -26,15 +26,12 @@ public class GoToProfile extends HttpServlet {
      */
     public GoToProfile() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
