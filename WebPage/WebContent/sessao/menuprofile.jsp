@@ -15,8 +15,8 @@
 	<form action="EditProfile" method="post">
 		<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
 		<p>User: ${user} </p>
-		<p>Email: <input type="text" name="email" value="${email}"> </p>
-		<p>Password: <input type="password" name="password" value="${password}"> </p>
+		<p>Email: <input type="text" name="email" value="${email}" required> </p>
+		<p>Password: <input type="password" name="password" value="${password}" required> </p>
 		<input type="submit" value="Salvar">
 	</form>
 	<form action="DeleteProfile" method="post">

@@ -13,13 +13,24 @@
 	<p></p>
 
 	<form action=EditMusic method="post">
-		<p>Title: <input name="title" type="text" value="${title}"></p>
-		<p>Artist: <input name="artist" type="text" value="${artist}"></p>
-		<p>Album: <input name="album" type="text" value="${album}"></p>
-		<p>Year: <input name="year" type="text" value="${year}"></p>
+		<p>
+			Title: <input name="title" type="text" value="${title}" required>
+		</p>
+		<p>
+			Artist: <input name="artist" type="text" value="${artist}">
+		</p>
+		<p>
+			Album: <input name="album" type="text" value="${album}">
+		</p>
+		<p>
+			Year: <input name="year" type="text" value="${year}">
+		</p>
 		<p>Path: ${path}"</p>
-		<input type="hidden" name="getid" value="${music_id}" />
-		<input type="submit" value="Save">
+		<input type="hidden" name="getid" value="${music_id}" /> <input
+			type="submit" value="Save">
+	</form>
+	<form action="GoToMenuPrincipal">
+		<input type="submit" value="Back">
 	</form>
 	${error}
 </body>

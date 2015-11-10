@@ -13,12 +13,23 @@
 	<p></p>
 
 	<form action="UpLoadMusic" method="post" enctype="multipart/form-data">
-		<p>Title: <input name="title" type="text" value="${title}"></p>
-		<p>Artist: <input name="artist" type="text" value="${artist}"></p>
-		<p>Album: <input name="album" type="text" value="${album}"></p>
-		<p>Year: <input name="year" type="text" value="${year}"></p>
-		<input type="file" name="file" size="50" />
-		<input type="submit" value="Upload">
+		<p>
+			Title: <input name="title" type="text" value="${title}" required>
+		</p>
+		<p>
+			Artist: <input name="artist" type="text" value="${artist}">
+		</p>
+		<p>
+			Album: <input name="album" type="text" value="${album}">
+		</p>
+		<p>
+			Year: <input name="year" type="text" value="${year}">
+		</p>
+		<input type="file" name="file" size="50" required/> <input type="submit"
+			value="Upload">
+	</form>
+	<form action="GoToMenuPrincipal">
+		<input type="submit" value="Back">
 	</form>
 </body>
 </html>

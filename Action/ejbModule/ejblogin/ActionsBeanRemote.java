@@ -29,7 +29,7 @@ public interface ActionsBeanRemote {
 	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path);
 	public boolean editMusicFile(String musicid, String title, String artist, String album, String year);
 	public Music getInfoMusicFile(String musicid);
-	public void detachFromMusic(String userid, String title);
+	public boolean detachFromMusic(String musicids);
 	public void listAllMusic(String userid);
 	public void searchAndListMusic(String userid, String title, String artist);
 }

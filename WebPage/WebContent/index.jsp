@@ -10,8 +10,8 @@
 	<div align="center" style="margin-top: 50px;">
 
 		<form action="Login" method="post">
-			Please enter your email: <input type="text" name="email" size="20px"> <br> 
-			Please enter your Password: <input type="password" name="password" size="20px"> <br>
+			Please enter your email: <input type="text" name="email" size="20px" required> <br> 
+			Please enter your Password: <input type="password" name="password" size="20px" required> <br>
 			<br> <input type="submit" value="login">
 		</form>
 		<form action="register.jsp">

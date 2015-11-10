@@ -398,9 +398,27 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void detachFromMusic(String userid, String title) {
+	public boolean detachFromMusic(String musicid) {
 		// As a	user, I	want to	detach myself from music I uploaded. This should neither delete	music from the server, nor from	playlists.
+		try{
+			userTransaction.begin();
+			String sql = "UPDATE Music m SET m.user= NULL WHERE m.id = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("b", Integer.parseInt(musicid));
+			queue.executeUpdate();
+			userTransaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro editProfile: "+e);
 
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+
+			return false;
+		}
 	}
 
 	@Override

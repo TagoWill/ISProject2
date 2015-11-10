@@ -18,16 +18,19 @@
 		<c:forEach items="${lists}" var="list">
 			<tr>
 				<td><a href="GoToEditMusic?music_id=${list.getId()}">${list.getTitle()}</a></td>
-				<td><form action="" method="post">
+				<td><form action="Detach" method="post">
 						<input type="hidden" name="getid" value="${list.getId()}" /> <input
 							type="submit" name="teste" value="Detach">
 					</form></td>
-				</tr>
+			</tr>
 		</c:forEach>
 	</table>
 	<form action="GoToInfoMusic">
 		<input type="submit" value="Add Music">
 	</form>
-
+	<form action="GoToMenuPrincipal">
+		<input type="submit" value="Back">
+	</form>
+	${error}
 </body>
 </html>
