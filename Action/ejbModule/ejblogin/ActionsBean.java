@@ -144,7 +144,6 @@ public class ActionsBean implements ActionsBeanRemote {
 	public boolean deleteProfile(String userid) {
 		// Apagar Perfil de Utilizador
 
-		//TODO NAO ESTA COMPLETO!!!!
 		String sql;
 		javax.persistence.Query queue;
 
@@ -155,6 +154,10 @@ public class ActionsBean implements ActionsBeanRemote {
 
 			for(Playlist list : conta.getPlaylist()){
 				deletePlaylist(Integer.toString(list.getId()), false);
+			}
+
+			for(Music list : conta.getSong()){
+				detachFromMusic(Integer.toString(list.getId()), false);
 			}
 
 			sql = "DELETE FROM Users u WHERE u.id = :b";
@@ -398,23 +401,26 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public boolean detachFromMusic(String musicid) {
+	public boolean detachFromMusic(String musicid, boolean iscommit) {
 		// As a	user, I	want to	detach myself from music I uploaded. This should neither delete	music from the server, nor from	playlists.
 		try{
-			userTransaction.begin();
+			if(iscommit)
+				userTransaction.begin();
 			String sql = "UPDATE Music m SET m.user= NULL WHERE m.id = :b";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(musicid));
 			queue.executeUpdate();
-			userTransaction.commit();
+			if(iscommit)
+				userTransaction.commit();
 			return true;
 		}catch(Exception e){
 			System.out.println("Erro editProfile: "+e);
-
-			try {
-				userTransaction.rollback();
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				e1.printStackTrace();
+			if(iscommit){
+				try {
+					userTransaction.rollback();
+				} catch (IllegalStateException | SecurityException | SystemException e1) {
+					e1.printStackTrace();
+				}
 			}
 
 			return false;

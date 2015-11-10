@@ -38,7 +38,7 @@ public class Detach extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(action.detachFromMusic(request.getParameter("getid"))){
+		if(action.detachFromMusic(request.getParameter("getid"), true)){
 			request.setAttribute("error", "Music detached");
 			request.getRequestDispatcher("GoToMusic").forward(request, response);
 		}else{
