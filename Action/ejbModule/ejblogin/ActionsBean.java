@@ -129,15 +129,13 @@ public class ActionsBean implements ActionsBeanRemote {
 			return true;
 		}catch(Exception e){
 			System.out.println("Erro editProfile: "+e);
+
 			try {
 				userTransaction.rollback();
-			} catch (IllegalStateException e1) {
-				e1.printStackTrace();
-			} catch (SecurityException e1) {
-				e1.printStackTrace();
-			} catch (SystemException e1) {
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
 				e1.printStackTrace();
 			}
+
 			return false;
 		}
 	}
@@ -175,7 +173,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public Playlist getPlaylistName(String playlistid) {
 		javax.persistence.Query q = Cursor.createQuery("FROM Playlist p WHERE p.id = :i");
@@ -295,7 +293,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public List<Music> listMyMusicFiles(String userid, String order) {
 		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
@@ -303,7 +301,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			Users conta = devolverPorId(userid);
 
 			String sql;
-				sql = "FROM Music m WHERE m.user = :a ORDER BY m.title ASC";
+			sql = "FROM Music m WHERE m.user = :a ORDER BY m.title ASC";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", conta);
 			//queue.setParameter("b", order);
@@ -354,11 +352,49 @@ public class ActionsBean implements ActionsBeanRemote {
 			return false;
 		}
 	}
+	@Override
+	public Music getInfoMusicFile(String musicid){
+		// Return Music info
+		javax.persistence.Query q = Cursor.createQuery("from Music m where m.id = :t");
+		q.setParameter("t", Integer.parseInt(musicid));
+
+		try{
+			Music infomusic = (Music) q.getSingleResult();
+			//System.out.println("TESTE: "+teste.getUser());
+			return infomusic;
+		}catch(Exception e){
+			return null;
+		}
+
+	}
+
 
 	@Override
-	public void editMusicFile(String userid, String title, String artist, String album, String year, String path) {
+	public boolean editMusicFile(String musicid, String title, String artist, String album, String year) {
 		// As a	user, I	want to	edit the data of music I added to the application.
+		try{
+			userTransaction.begin();
+			String sql = "UPDATE Music m SET m.title= :a, m.artist= :c, m.album= :d, m.year= :e WHERE m.id = :b";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", title);
+			queue.setParameter("c", artist);
+			queue.setParameter("d", album);
+			queue.setParameter("e", year);
+			queue.setParameter("b", Integer.parseInt(musicid));
+			queue.executeUpdate();
+			userTransaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro editProfile: "+e);
 
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+
+			return false;
+		}
 	}
 
 	@Override
