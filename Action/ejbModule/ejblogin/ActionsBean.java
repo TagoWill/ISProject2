@@ -391,30 +391,25 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a	user I want	to delete music files from a playlist.
 		try{
 			userTransaction.begin();
-			/*String sql = "from Music m where m.id= :a";
+			String sql = "from Music m where m.id= :a";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
-			queue.setParameter("a", Integer.parseInt(musicid));
-			Music musica = (Music) queue.getSingleResult();*/
+			queue.setParameter("a", Integer.parseInt(music_id));
+			Music musica = (Music) queue.getSingleResult();
 			
 			
-			String sql = "from Playlist p where p.id= :a";
-			javax.persistence.Query queue = Cursor.createQuery(sql);
+			sql = "from Playlist p where p.id= :a";
+			queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(playlist_id));
 			Playlist playlist = (Playlist) queue.getSingleResult();
 			
 			
-			List<Music> removemusic = playlist.getPlaylistSongs();
+			List<Music> listmusic = playlist.getPlaylistSongs();
 			
-			for(Music musicas : removemusic){
-				
-			}
-
-			//addmusic.add(musica);
+			listmusic.remove(musica);
+			
 			
 
-			//playlist.setPlaylistSongs(addmusic);
-			
-			
+			playlist.setPlaylistSongs(listmusic);
 
 			Cursor.persist(playlist);
 			userTransaction.commit();
