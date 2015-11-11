@@ -522,9 +522,18 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void listAllMusic(String userid) {
+	public List<Music> listAllMusic() {
 		// As a	user, I	want to	list all the music registered in the application by	all	other users.
-
+		try{
+			String sql = "FROM Music m";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			@SuppressWarnings("unchecked")
+			List<Music> list = queue.getResultList();
+			return list;
+		}catch(Exception e){
+			System.out.println("Erro listAllMusic: "+e);
+			return null;
+		}
 	}
 
 	@Override
