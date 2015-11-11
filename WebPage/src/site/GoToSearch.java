@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.Music;
+import data.Playlist;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -39,8 +40,10 @@ public class GoToSearch extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
 			List<Music> lists = action.listAllMusic();
+			List<Playlist> listplaylist = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), "ASC");
 			if(lists!=null){
 				request.setAttribute("lists", lists);
+				request.setAttribute("listplaylist", listplaylist);
 			}else{
 				request.setAttribute("error", "Error: Cannot list playlist");
 			}

@@ -251,8 +251,16 @@ public class ActionsBean implements ActionsBeanRemote {
 			{
 				userTransaction.begin();
 			}
-			String sql = "DELETE FROM Playlist p WHERE p.id = :b";
+			String sql = "FROM Playlist p WHERE p.id = :b";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("b", Integer.parseInt(playlistid));
+			Playlist playlist = (Playlist) queue.getSingleResult();
+			
+			playlist.setPlaylistSongs(null);
+			Cursor.persist(playlist);
+			
+			sql = "DELETE FROM Playlist p WHERE p.id = :b";
+			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(playlistid));
 			queue.executeUpdate();
 			if(iscommit == true)
@@ -320,7 +328,6 @@ public class ActionsBean implements ActionsBeanRemote {
 	@Override
 	public List<Music> listMyMusicFilesByPlaylist(String userid, String playlistid) {
 		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
-		//TODO verificar se necessito mesmo do iduser
 		try{
 			userTransaction.begin();
 			String sql = "from Playlist p where p.id= :a";
@@ -337,7 +344,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			try {
 				userTransaction.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
@@ -363,6 +369,11 @@ public class ActionsBean implements ActionsBeanRemote {
 			
 			List<Playlist> addplaylist = musica.getPlaylist();
 			List<Music> addmusic = playlist.getPlaylistSongs();
+			
+			if(addmusic.indexOf(musica) != -1){
+				userTransaction.commit();
+				return false;
+			}
 			
 			addplaylist.add(playlist);
 			addmusic.add(musica);

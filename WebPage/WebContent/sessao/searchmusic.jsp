@@ -26,8 +26,20 @@
 	<table>
 		<c:forEach items="${lists}" var="list">
 			<tr>
-				<td><a href="GoToSearch?title=${list.getId()}">${list.getTitle()}</a></td>
-				<td><a href="GoToSearch?artist=${list.getId()}">${list.getArtist()}</a></td>
+				<td>${list.getTitle()}</td>
+				<td>${list.getArtist()}</td>
+				<td>${list.getAlbum()}</td>
+				<td>${list.getYear()}</td>
+				<td><form action="AddPlaylist" method="post">
+					<select name="play">
+					<c:forEach items="${listplaylist}" var="playlist">
+						<option value="${playlist.getId()}">${playlist.getPlaylistName()}</option>
+					</c:forEach>
+					</select>
+						<input type="hidden" name="goto" value="gotosearch" />
+						<input type="hidden" name="getid" value="${list.getId()}" /> <input
+							type="submit" name="teste" value="addPlaylist">
+					</form></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -38,7 +38,6 @@ public class AddPlaylist extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO Tornar isto geral
 		String id_music = request.getParameter("getid");
 		String id_playlist = request.getParameter("play");
 		
@@ -47,7 +46,12 @@ public class AddPlaylist extends HttpServlet {
 		}else{
 			request.setAttribute("error", "Error: Cannot add music to playlist");
 		}
-		request.getRequestDispatcher("GoToMusic").forward(request, response);
+		if(request.getParameter("goto")!=null){
+			request.getRequestDispatcher("GoToSearch").forward(request, response);
+		}else{
+			request.getRequestDispatcher("GoToMusic").forward(request, response);
+		}
+		
 	}
 
 }
