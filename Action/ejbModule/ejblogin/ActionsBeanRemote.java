@@ -30,6 +30,6 @@ public interface ActionsBeanRemote {
 	public boolean editMusicFile(String musicid, String title, String artist, String album, String year);
 	public Music getInfoMusicFile(String musicid);
 	public boolean detachFromMusic(String musicids, boolean iscommit);
-	public void listAllMusic(String userid);
+	public List<Music> listAllMusic();
 	public List<Music> searchAndListMusic(int tipo, String title, String artist);
 }

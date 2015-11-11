@@ -1,6 +1,7 @@
 package site;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import data.Music;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -36,6 +38,12 @@ public class GoToSearch extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
+			List<Music> lists = action.listAllMusic();
+			if(lists!=null){
+				request.setAttribute("lists", lists);
+			}else{
+				request.setAttribute("error", "Error: Cannot list playlist");
+			}
 			request.getRequestDispatcher("/sessao/searchmusic.jsp").forward(request, response);
 		}
 	}
