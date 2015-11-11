@@ -479,7 +479,6 @@ public class ActionsBean implements ActionsBeanRemote {
 					e1.printStackTrace();
 				}
 			}
-
 			return false;
 		}
 	}
@@ -491,9 +490,28 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void searchAndListMusic(String userid, String title, String artist) {
+	public List<Music> searchAndListMusic(int tipo, String title, String artist) {
 		// As a	user, I	want to	list all music registered in the application that satisfies some search	criteria over the title	and/or artist.
-
+		try{
+			String sql;
+			javax.persistence.Query queue;
+			if(tipo==0)
+			{
+				sql = "FROM Music m WHERE m.title = :a";
+				queue = Cursor.createQuery(sql);
+				queue.setParameter("a", title);
+			} else {
+				sql = "FROM Music m WHERE m.artist = :a";
+				queue = Cursor.createQuery(sql);
+				queue.setParameter("a", artist);
+			}
+			@SuppressWarnings("unchecked")
+			List<Music> list = queue.getResultList();
+			return list;
+		}catch(Exception e){
+			System.out.println("Erro searchAndListMusic: "+e);
+			return null;
+		}
 	}
 
 }

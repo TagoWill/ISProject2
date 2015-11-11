@@ -31,5 +31,5 @@ public interface ActionsBeanRemote {
 	public Music getInfoMusicFile(String musicid);
 	public boolean detachFromMusic(String musicids, boolean iscommit);
 	public void listAllMusic(String userid);
-	public void searchAndListMusic(String userid, String title, String artist);
+	public List<Music> searchAndListMusic(int tipo, String title, String artist);
 }
