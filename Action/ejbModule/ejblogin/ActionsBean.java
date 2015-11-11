@@ -500,13 +500,16 @@ public class ActionsBean implements ActionsBeanRemote {
 				sql = "FROM Music m WHERE m.title = :a";
 				queue = Cursor.createQuery(sql);
 				queue.setParameter("a", title);
+				System.out.println("title: "+title);
 			} else {
 				sql = "FROM Music m WHERE m.artist = :a";
 				queue = Cursor.createQuery(sql);
 				queue.setParameter("a", artist);
+				System.out.println("artist: "+artist);
 			}
 			@SuppressWarnings("unchecked")
 			List<Music> list = queue.getResultList();
+			System.out.println("musica: "+list.get(0).getTitle());
 			return list;
 		}catch(Exception e){
 			System.out.println("Erro searchAndListMusic: "+e);

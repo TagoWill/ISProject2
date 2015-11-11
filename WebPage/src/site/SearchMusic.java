@@ -50,5 +50,6 @@ public class SearchMusic extends HttpServlet {
 		}else{
 			request.setAttribute("error", "Error: Cannot display results");
 		}
+		request.getRequestDispatcher("/sessao/searchmusic.jsp").forward(request, response);
 	}
 }

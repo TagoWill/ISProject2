@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,8 +15,8 @@
 	<form action="SearchMusic" method="post">
 		<p>Search:</p>
   		<select name="tipo">
-    		<option value="1">Title</option>
-    		<option value="2">Artist</option>
+    		<option value="0">Title</option>
+    		<option value="1">Artist</option>
   		</select>
   		<input type="text" name="search_input" value="${search_input}">
 		<input type="submit" value="Go">
@@ -23,10 +24,10 @@
 	<p></p>
 	<p></p>
 	<table>
-		<c:forEach songs="${list}" var="list">
+		<c:forEach items="${lists}" var="list">
 			<tr>
 				<td><a href="GoToSearch?title=${list.getId()}">${list.getTitle()}</a></td>
-				<td><a href="GoToSearch?artist=${list.getId()}">${list.getTitle()}</a></td>
+				<td><a href="GoToSearch?artist=${list.getId()}">${list.getArtist()}</a></td>
 			</tr>
 		</c:forEach>
 	</table>
