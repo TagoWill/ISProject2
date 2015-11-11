@@ -25,7 +25,7 @@ public interface ActionsBeanRemote {
 	public List<Music> listMyMusicFiles(String userid, String order);
 	public List<Music> listMyMusicFilesByPlaylist(String userid, String playlistid);
 	public boolean addMusicFileToPlaylist(String musicid, String playlistid);
-	public void deleteMusicFileFromPlaylist(String userid, String playlist_name);
+	public boolean deleteMusicFileFromPlaylist(String music_id, String playlist_id);
 	public boolean addMusicFile(String userid, String title, String artist, String album, String year, String path);
 	public boolean editMusicFile(String musicid, String title, String artist, String album, String year);
 	public Music getInfoMusicFile(String musicid);

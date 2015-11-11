@@ -387,9 +387,47 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void deleteMusicFileFromPlaylist(String userid, String playlist_name) {
+	public boolean deleteMusicFileFromPlaylist(String music_id, String playlist_id) {
 		// As a	user I want	to delete music files from a playlist.
+		try{
+			userTransaction.begin();
+			/*String sql = "from Music m where m.id= :a";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", Integer.parseInt(musicid));
+			Music musica = (Music) queue.getSingleResult();*/
+			
+			
+			String sql = "from Playlist p where p.id= :a";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", Integer.parseInt(playlist_id));
+			Playlist playlist = (Playlist) queue.getSingleResult();
+			
+			
+			List<Music> removemusic = playlist.getPlaylistSongs();
+			
+			for(Music musicas : removemusic){
+				
+			}
 
+			//addmusic.add(musica);
+			
+
+			//playlist.setPlaylistSongs(addmusic);
+			
+			
+
+			Cursor.persist(playlist);
+			userTransaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro listMyMusic: "+e);
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+			return false;
+		}
 	}
 
 	@Override
