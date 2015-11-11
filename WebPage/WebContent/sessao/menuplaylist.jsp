@@ -29,8 +29,6 @@
 						<input type="hidden" name="getid" value="${list.getId()}" /> <input
 							type="submit" name="teste" value="Delete">
 					</form></td>
-			<!-- <td><c:out value="${list.getPlaylistName()}" /></td>
-				<td><href="${list.getPlaylistName()} value="Delete" /></td>  -->
 				</tr>
 		</c:forEach>
 	</table>

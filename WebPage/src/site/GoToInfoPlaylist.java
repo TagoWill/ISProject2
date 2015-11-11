@@ -42,6 +42,7 @@ public class GoToInfoPlaylist extends HttpServlet {
 			if (p_id != null || p_name != null) {
 				request.setAttribute("playlist_id", p_id);
 				request.setAttribute("name", p_name.getPlaylistName());
+				request.setAttribute("lists", action.listMyMusicFilesByPlaylist("", p_id));
 				request.getRequestDispatcher("/sessao/infoplaylist.jsp").forward(request, response);
 			} else {
 				request.setAttribute("error", "error: This playlist does not exist");

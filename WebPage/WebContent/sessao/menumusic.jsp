@@ -22,6 +22,15 @@
 						<input type="hidden" name="getid" value="${list.getId()}" /> <input
 							type="submit" name="teste" value="Detach">
 					</form></td>
+					<td><form action="AddPlaylist" method="post">
+					<select name="play">
+					<c:forEach items="${listplaylist}" var="playlist">
+						<option value="${playlist.getId()}">${playlist.getPlaylistName()}</option>
+					</c:forEach>
+					</select>
+						<input type="hidden" name="getid" value="${list.getId()}" /> <input
+							type="submit" name="teste" value="addPlaylist">
+					</form></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -1,6 +1,8 @@
 package data;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 import ligacao.Users;
@@ -23,9 +25,10 @@ public class Music implements Serializable {
 	private String album;
 	private String year;
 	private String path;
-	@ManyToOne
-	private Playlist playlist;
+	@ManyToMany(mappedBy = "song")
+	private List<Playlist> playlist;
 	
+
 	public Music() {
 		super();
 	}
@@ -94,4 +97,13 @@ public class Music implements Serializable {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+	public List<Playlist> getPlaylist() {
+		return playlist;
+	}
+
+	public void setPlaylist(List<Playlist> playlist) {
+		this.playlist = playlist;
+	}
+
 }

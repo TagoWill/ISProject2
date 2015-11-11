@@ -318,15 +318,72 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public void listMyMusicFilesByPlaylist(String userid, String playlist_name) {
+	public List<Music> listMyMusicFilesByPlaylist(String userid, String playlistid) {
 		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
+		//TODO verificar se necessito mesmo do iduser
+		try{
+			userTransaction.begin();
+			String sql = "from Playlist p where p.id= :a";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", Integer.parseInt(playlistid));
+			Playlist playlist = (Playlist) queue.getSingleResult();
+			
+			List<Music> musica = playlist.getPlaylistSongs();
+			System.out.println("A musica: "+musica.get(0));
+			userTransaction.commit();
+			return musica;
+		}catch(Exception e){
+			System.out.println("Erro listMyMusicFilesByPlaylist: "+e);
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
+			return null;
+		}
 	}
 
 	@Override
-	public void addMusicFileToPlaylist(String userid, String playlist_name) {
+	public boolean addMusicFileToPlaylist(String musicid, String playlistid) {
 		// As a	user I want	to add music files to a playlist.
-
+		try{
+			userTransaction.begin();
+			String sql = "from Music m where m.id= :a";
+			javax.persistence.Query queue = Cursor.createQuery(sql);
+			queue.setParameter("a", Integer.parseInt(musicid));
+			Music musica = (Music) queue.getSingleResult();
+			
+			
+			sql = "from Playlist p where p.id= :a";
+			queue = Cursor.createQuery(sql);
+			queue.setParameter("a", Integer.parseInt(playlistid));
+			Playlist playlist = (Playlist) queue.getSingleResult();
+			
+			List<Playlist> addplaylist = musica.getPlaylist();
+			List<Music> addmusic = playlist.getPlaylistSongs();
+			
+			addplaylist.add(playlist);
+			addmusic.add(musica);
+			
+			musica.setPlaylist(addplaylist);
+			playlist.setPlaylistSongs(addmusic);
+			
+			
+			Cursor.persist(musica);
+			Cursor.persist(playlist);
+			userTransaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("Erro listMyMusic: "+e);
+			try {
+				userTransaction.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+			return false;
+		}
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class Playlist implements Serializable {
 	@ManyToOne
 	private Users user;
 	private String playlist_name;
-	@OneToMany(mappedBy = "playlist")
+	@ManyToMany
 	private List<Music> song;
 	
 	public Playlist() {
