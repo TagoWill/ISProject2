@@ -65,7 +65,7 @@ public class UpLoadMusic extends HttpServlet {
 	    	Files.copy(fileContent, savefile.toPath());
 	    }
 	    
-		if(action.addMusicFile(session.getAttribute("user").toString(), title, artist, album, year, getServletContext().getInitParameter("file-upload").toString() + fileName)){
+		if(action.addMusicFile(session.getAttribute("user").toString(), title, artist, album, year, getServletContext().getInitParameter("file-upload").toString()+"/" + fileName)){
 			request.setAttribute("error", "Salvo");
 		}else{
 			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
