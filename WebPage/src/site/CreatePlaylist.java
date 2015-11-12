@@ -41,12 +41,17 @@ public class CreatePlaylist extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
-		if(action.addPlaylist(request.getSession().getAttribute("user").toString()  , request.getParameter("listname"))){
-			request.setAttribute("error", "Playlist created");
-		}else{
-			request.setAttribute("error", "Error: Cannot create playlist");
-		}
-		
+		String playlist_name = request.getParameter("listname");
+		if(!playlist_name.isEmpty())
+		{
+			if(action.addPlaylist(request.getSession().getAttribute("user").toString()  , playlist_name)){
+				request.setAttribute("error", "Playlist created");
+			}else{
+				request.setAttribute("error", "Error: Cannot create playlist");
+			}
+		} else {
+			request.setAttribute("error", "Error: Playlist name is empty");
+		}	
 		request.getRequestDispatcher("GoToPlaylist").forward(request, response);
 	}
 
