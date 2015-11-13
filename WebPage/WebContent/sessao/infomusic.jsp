@@ -11,7 +11,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>Menu</title>
+	<title>Music info</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,12 +41,12 @@
   						<span class="icon-bar"></span>
   						<span class="icon-bar"></span>
   					</button>
-  					<a class="navbar-brand" href="#">Music Library</a>
+  					<a class="navbar-brand" href="GoToMenuPrincipal">Music Library</a>
   				</div>
   				<div id="navbar" class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="GoToSearch">Search</a></li>
-  						<li><a href="GoToPlaylist">My PlayLists</a></li>
+  						<li><a href="GoToPlaylist">My Playlists</a></li>
   						<li><a href="GoToMusic">My Music</a></li>
   						<li><a href="GoToProfile">Profile</a></li>
   						<li><a href="LogOut">Logout</a></li>
@@ -60,19 +60,19 @@
 
 	<form action="UpLoadMusic" method="post" enctype="multipart/form-data">
 		<p>
-			Title: <input name="title" type="text" value="${title}" required>
-		</p>
-		<p>
-			Artist: <input name="artist" type="text" value="${artist}">
-		</p>
-		<p>
-			Album: <input name="album" type="text" value="${album}">
-		</p>
-		<p>
-			Year: <input name="year" type="text" value="${year}">
-		</p>
-		<input type="file" name="file" size="50" required/> <input type="submit"
-			value="Upload">
+      Title: <input class="form-control" name="title" type="text" value="${title}" required>
+    </p>
+    <p>
+      Artist: <input class="form-control" name="artist" type="text" value="${artist}" required>
+    </p>
+    <p>
+      Album: <input class="form-control" name="album" type="text" value="${album}">
+    </p>
+    <p>
+      Year: <input class="form-control" name="year" type="text" value="${year}">
+    </p>
+		<input type="file" name="file" size="50" required/> 
+    <button type="submit" class="btn btn-xs btn-primary">Upload</button>
 	</form>
 	</div>
   	</div>

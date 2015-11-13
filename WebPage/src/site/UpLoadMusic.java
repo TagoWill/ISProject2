@@ -24,16 +24,16 @@ import ejblogin.ActionsBeanRemote;
 @MultipartConfig
 public class UpLoadMusic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
+
+
 	@EJB
 	ActionsBeanRemote action;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpLoadMusic() {
-        super();
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UpLoadMusic() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,19 +59,24 @@ public class UpLoadMusic extends HttpServlet {
 		String album = request.getParameter("album");
 		String year = request.getParameter("year");
 		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-	    String fileName = filePart.getSubmittedFileName();
-	    File savefile = new File(getServletContext().getInitParameter("file-upload"),fileName);
-	    try (InputStream fileContent = filePart.getInputStream()){
-	    	Files.copy(fileContent, savefile.toPath());
-	    }
-	    
-		if(action.addMusicFile(session.getAttribute("user").toString(), title, artist, album, year, getServletContext().getInitParameter("file-upload").toString()+"/" + fileName)){
-			request.setAttribute("error", "Salvo");
+		String fileName = filePart.getSubmittedFileName();
+		File savefile = new File(getServletContext().getInitParameter("file-upload"),fileName);
+		if(!savefile.exists()) {
+			try (InputStream fileContent = filePart.getInputStream()){
+				Files.copy(fileContent, savefile.toPath());
+			}
+
+			if(action.addMusicFile(session.getAttribute("user").toString(), title, artist, album, year, getServletContext().getInitParameter("file-upload").toString()+"/" + fileName)){
+				request.setAttribute("error", "Saved");
+			}else{
+				request.setAttribute("error", "Error: Cannot make changes");
+			}
+
+			request.getRequestDispatcher("GoToMusic").forward(request, response);
 		}else{
-			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
+			request.setAttribute("error", "Error: File already exists");
+			request.getRequestDispatcher("GoToMusic").forward(request, response);
 		}
-		
-		request.getRequestDispatcher("GoToMusic").forward(request, response);
 	}
 
 }

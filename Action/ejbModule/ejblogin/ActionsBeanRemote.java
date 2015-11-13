@@ -19,7 +19,7 @@ public interface ActionsBeanRemote {
 	public boolean deleteProfile(String userid);
 	public Playlist getPlaylistName(String playlistid);
 	public boolean addPlaylist(String userid, String playlist_name);
-	public boolean editPlaylist(String playlistid, String playlist_name);
+	public boolean editPlaylist(String userid, String playlistid, String playlist_name);
 	public boolean deletePlaylist(String playlistid, boolean iscommit);
 	public List<Playlist> listMyPlaylists(String userid, String order);
 	public List<Music> listMyMusicFiles(String userid, String order);

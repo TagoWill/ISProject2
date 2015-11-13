@@ -41,12 +41,12 @@ pageEncoding="ISO-8859-1"%>
   						<span class="icon-bar"></span>
   						<span class="icon-bar"></span>
   					</button>
-  					<a class="navbar-brand" href="#">Music Library</a>
+  					<a class="navbar-brand" href="GoToMenuPrincipal">Music Library</a>
   				</div>
   				<div id="navbar" class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="GoToSearch">Search</a></li>
-  						<li><a href="GoToPlaylist">My PlayLists</a></li>
+  						<li><a href="GoToPlaylist">My Playlists</a></li>
   						<li><a href="GoToMusic">My Music</a></li>
   						<li><a href="GoToProfile">Profile</a></li>
   						<li><a href="LogOut">Logout</a></li>

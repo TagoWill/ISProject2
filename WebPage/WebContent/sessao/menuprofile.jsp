@@ -11,7 +11,7 @@ pageEncoding="ISO-8859-1"%>
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>Menu</title>
+	<title>My profile</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,12 +41,12 @@ pageEncoding="ISO-8859-1"%>
   						<span class="icon-bar"></span>
   						<span class="icon-bar"></span>
   					</button>
-  					<a class="navbar-brand" href="#">Music Library</a>
+  					<a class="navbar-brand" href="GoToMenuPrincipal">Music Library</a>
   				</div>
   				<div id="navbar" class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="GoToSearch">Search</a></li>
-  						<li><a href="GoToPlaylist">My PlayLists</a></li>
+  						<li><a href="GoToPlaylist">My Playlists</a></li>
   						<li><a href="GoToMusic">My Music</a></li>
   						<li><a href="GoToProfile">Profile</a></li>
   						<li><a href="LogOut">Logout</a></li>
@@ -57,22 +57,23 @@ pageEncoding="ISO-8859-1"%>
       <div class="page-header" >
       </div>
   		<div class="page-header" >
+        <h1>Profile info</h1>
   			<form action="EditProfile" method="post">
-  				<p>Nome: <input type="text" name="nome" value="${nome}"> </p>
-  				<p>User: ${user} </p>
-  				<p>Email: <input type="text" name="email" value="${email}" required> </p>
-  				<p>Password: <input type="password" name="password" value="${password}" required> </p>
-  				<input type="submit" value="Salvar">
+          <p>User: ${user} </p>
+  				<p>Name: <input type="text" name="nome" class="form-control" placeholder="${nome}" value="${nome}"> </p>
+  				<p>Email: <input type="email" name="email" class="form-control" placeholder="${email}" value="${email}" required> </p>
+  				<p>Password: <input type="password" name="password" class="form-control" placeholder="${password}" value="${password}" required> </p>
+  				<button type="submit" class="btn btn-lg btn-primary btn-block" >Save</button>
   			</form>
   			<form action="DeleteProfile" method="post">
-  				<input type="submit" value="Apagar conta">
-  			</form>
-  			<form action="GoToMenuPrincipal">
-  				<input type="submit" value="Back">
+  				<button type="submit" class="btn btn-lg btn-danger btn-block">Delete acount</button>
   			</form>
   			
   			<p></p>
-  			${error}
+        <h3>
+      <span class="label label-default">
+  			${error}</span>
+    </h3>
   		</div>
   	</div>
     <!-- Bootstrap core JavaScript

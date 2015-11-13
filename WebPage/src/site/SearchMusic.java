@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.Music;
+import data.Playlist;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -33,8 +35,12 @@ public class SearchMusic extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		if(session == null || session.getAttribute("user") == null){
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
+		}else{
+			request.getRequestDispatcher("GoToSearch").forward(request, response);
+		}
 	}
 
 	/**
@@ -44,8 +50,10 @@ public class SearchMusic extends HttpServlet {
 		int tipo = Integer.parseInt(request.getParameter("tipo"));
 		String search = request.getParameter("search_input");
 		List<Music> list = action.searchAndListMusic(tipo, search, search);
+		List<Playlist> listplaylist = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), "ASC");
 		if(list!=null){
 			request.setAttribute("lists", list);
+			request.setAttribute("listplaylist", listplaylist);
 		}else{
 			request.setAttribute("error", "Error: Cannot display results");
 		}

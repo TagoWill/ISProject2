@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ejblogin.ActionsBeanRemote;
 
@@ -31,8 +32,13 @@ public class SignUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("/register.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		if(session == null || session.getAttribute("user") == null){
+			request.getRequestDispatcher("/register.jsp").forward(request, response);
+		}else{
+			request.getRequestDispatcher("GoToMenuPrincipal").forward(request, response);
+		}
+		
 	}
 
 	/**

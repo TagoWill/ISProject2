@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("user", login.getId());
                 request.getRequestDispatcher("GoToMenuPrincipal").forward(request, response);
         	}else{
-        		request.setAttribute("error", "User não valido");
+        		request.setAttribute("error", "Authentication error");
         		request.getRequestDispatcher("/index.jsp").forward(request, response);
         	}
             

@@ -45,6 +45,9 @@ pageEncoding="ISO-8859-1"%>
   		<form class="form-signin" action="register.jsp">
   			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   		</form>
+      <h3>
+  <span class="label label-default">${error}</span>
+</h3>
 
   	</div> <!-- /container -->
 

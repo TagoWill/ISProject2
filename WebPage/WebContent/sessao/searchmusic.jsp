@@ -42,12 +42,12 @@ pageEncoding="ISO-8859-1"%>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Music Library</a>
+              <a class="navbar-brand" href="GoToMenuPrincipal">Music Library</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="GoToSearch">Search</a></li>
-                <li><a href="GoToPlaylist">My PlayLists</a></li>
+                <li><a href="GoToPlaylist">My Playlists</a></li>
                 <li><a href="GoToMusic">My Music</a></li>
                 <li><a href="GoToProfile">Profile</a></li>
                 <li><a href="LogOut">Logout</a></li>
@@ -55,40 +55,64 @@ pageEncoding="ISO-8859-1"%>
             </div>
           </div>
         </nav>
-              <div class="page-header" >
-      </div>
         <div class="page-header" >
-         <form action="SearchMusic" method="post">
-          <p>Search:</p>
-          <select name="tipo">
-            <option value="0">Title</option>
-            <option value="1">Artist</option>
-          </select>
-          <input type="text" name="search_input" value="${search_input}">
-          <input type="submit" value="Go">
-        </form>
+        </div>
+        <div class="page-header" >
+          <h1>Search</h1>
+          <table>
+           <form action="SearchMusic" method="post">
+            <tr>
+              <td><select name="tipo">
+                <option value="0">Title</option>
+                <option value="1">Artist</option>
+              </select></td>
+              <td><input type="text" class="form-control" name="search_input" value="${search_input}" required></td>
+              <td><button type="submit" class="btn btn-s btn-primary" value="">Go</button></td>
+            </form>
+          </tr>
+        </table>
         <p></p>
         <p></p>
-        <table>
-          <c:forEach items="${lists}" var="list">
-          <tr>
-            <td>${list.getTitle()}</td>
-            <td>${list.getArtist()}</td>
-            <td>${list.getAlbum()}</td>
-            <td>${list.getYear()}</td>
-            <td><form action="AddPlaylist" method="post">
-             <select name="play">
-               <c:forEach items="${listplaylist}" var="playlist">
-               <option value="${playlist.getId()}">${playlist.getPlaylistName()}</option>
-             </c:forEach>
-           </select>
-           <input type="hidden" name="goto" value="gotosearch" />
-           <input type="hidden" name="getid" value="${list.getId()}" /> <input
-           type="submit" name="teste" value="addPlaylist">
-         </form></td>
-       </tr>
-     </c:forEach>
-   </table>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Album</th>
+                  <th>Year</th>
+                  <th>Path</th>
+                  <th>Add to Playlist</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach items="${lists}" var="list">
+                <tr>
+                 <td>${list.getTitle()}</td>
+                 <td>${list.getArtist()}</td>
+                 <td>${list.getAlbum()}</td>
+                 <td>${list.getYear()}</td>
+                 <td>${list.getPath()}</td>
+                 <td><form action="AddPlaylist" method="post">
+                  <select name="play">
+                   <c:forEach items="${listplaylist}" var="playlist">
+                   <option value="${playlist.getId()}">${playlist.getPlaylistName()}</option>
+                 </c:forEach>
+               </select>
+               <input type="hidden" name="goto" value="gotosearch" />
+               <input type="hidden" name="getid" value="${list.getId()}" /> <button type="submit" class="btn btn-xs btn-default">addPlaylist</button>
+             </form></td>
+           </c:forEach>
+         </tbody>
+       </table>
+     </div>
+   </div>
+   <span class="label label-default">
+  			${error}</span>
+    </h3>
  </div>
 </div>
     <!-- Bootstrap core JavaScript

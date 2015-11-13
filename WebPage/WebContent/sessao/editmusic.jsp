@@ -11,7 +11,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>Menu</title>
+	<title>Music Info to edite</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,12 +41,12 @@
   						<span class="icon-bar"></span>
   						<span class="icon-bar"></span>
   					</button>
-  					<a class="navbar-brand" href="#">Music Library</a>
+  					<a class="navbar-brand" href="GoToMenuPrincipal">Music Library</a>
   				</div>
   				<div id="navbar" class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-right">
   						<li><a href="GoToSearch">Search</a></li>
-  						<li><a href="GoToPlaylist">My PlayLists</a></li>
+  						<li><a href="GoToPlaylist">My Playlists</a></li>
   						<li><a href="GoToMusic">My Music</a></li>
   						<li><a href="GoToProfile">Profile</a></li>
   						<li><a href="LogOut">Logout</a></li>
@@ -60,25 +60,25 @@
 
 	<form action=EditMusic method="post">
 		<p>
-			Title: <input name="title" type="text" value="${title}" required>
+			Title: <input class="form-control" name="title" type="text" value="${title}" required>
 		</p>
 		<p>
-			Artist: <input name="artist" type="text" value="${artist}">
+			Artist: <input class="form-control" name="artist" type="text" value="${artist}" required>
 		</p>
 		<p>
-			Album: <input name="album" type="text" value="${album}">
+			Album: <input class="form-control" name="album" type="text" value="${album}">
 		</p>
 		<p>
-			Year: <input name="year" type="text" value="${year}">
+			Year: <input class="form-control" name="year" type="text" value="${year}">
 		</p>
 		<p>Path: ${path}"</p>
-		<input type="hidden" name="getid" value="${music_id}" /> <input
-			type="submit" value="Save">
+		<input type="hidden" name="getid" value="${music_id}" /> 
+    <button type="submit" class="btn btn-s btn-primary" >Save</button>
 	</form>
-	<form action="GoToMenuPrincipal">
-		<input type="submit" value="Back">
-	</form>
-	${error}
+
+	<h3>
+  <span class="label label-default">${error}</span>
+</h3>
 </div>
   	</div>
     <!-- Bootstrap core JavaScript

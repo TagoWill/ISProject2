@@ -49,9 +49,11 @@ pageEncoding="ISO-8859-1"%>
   			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
   		</form>
   		<form class="form-signin" action="index.jsp">
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="back">
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Back">
 		</form>
-
+<h3>
+  <span class="label label-default">${error}</span>
+</h3>
   	</div> <!-- /container -->
 
 

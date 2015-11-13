@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ejblogin.ActionsBeanRemote;
 
@@ -40,10 +41,11 @@ public class EditPlaylistName extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String p_id = request.getParameter("playlist_id");
 		String p_name = request.getParameter("playlist_name");
-		if(action.editPlaylist(p_id, p_name)){
-			request.setAttribute("error", "Salvo");
+		HttpSession session = request.getSession();
+		if(action.editPlaylist(session.getAttribute("user").toString(),p_id, p_name)){
+			request.setAttribute("error", "Saved");
 		}else{
-			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
+			request.setAttribute("error", "Error: Cannot change name");
 		};
 		request.getRequestDispatcher("GoToPlaylist").forward(request, response);
 	}

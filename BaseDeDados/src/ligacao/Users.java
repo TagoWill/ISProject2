@@ -14,13 +14,13 @@ import data.Playlist;
  */
 @Entity
 
-@SequenceGenerator(name="seq", initialValue=2, allocationSize=1000)
+//@SequenceGenerator(name="seq", initialValue=2, allocationSize=1000)
 public class Users implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	//@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	//@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private int id;
 	private String username;
 	private String password;
