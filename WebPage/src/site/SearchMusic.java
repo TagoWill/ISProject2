@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import data.Music;
 import data.Playlist;
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -57,6 +58,9 @@ public class SearchMusic extends HttpServlet {
 		}else{
 			request.setAttribute("error", "Error: Cannot display results");
 		}
+		HttpSession session = request.getSession();
+		Users login = action.getUserByID(session.getAttribute("user").toString());
+		request.setAttribute("nome", login.getNome());
 		request.getRequestDispatcher("/sessao/searchmusic.jsp").forward(request, response);
 	}
 }

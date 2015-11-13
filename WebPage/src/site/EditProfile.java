@@ -51,9 +51,7 @@ public class EditProfile extends HttpServlet {
 		}else{
 			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
 		}
-		
 		request.getRequestDispatcher("GoToProfile").forward(request, response);
-		
 	}
 
 }

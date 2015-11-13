@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -39,7 +40,6 @@ public class UpLoadMusic extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
@@ -54,6 +54,8 @@ public class UpLoadMusic extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		Users login = action.getUserByID(session.getAttribute("user").toString());
+		request.setAttribute("nome", login.getNome());
 		String title = request.getParameter("title");
 		String artist = request.getParameter("artist");
 		String album = request.getParameter("album");

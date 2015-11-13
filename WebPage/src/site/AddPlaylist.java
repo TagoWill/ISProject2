@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -40,7 +39,6 @@ public class AddPlaylist extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id_music = request.getParameter("getid");
 		String id_playlist = request.getParameter("play");
-		
 		if(action.addMusicFileToPlaylist(id_music, id_playlist)){
 			request.setAttribute("error", "Music added to playlist");
 		}else{
@@ -51,7 +49,5 @@ public class AddPlaylist extends HttpServlet {
 		}else{
 			request.getRequestDispatcher("GoToMusic").forward(request, response);
 		}
-		
 	}
-
 }

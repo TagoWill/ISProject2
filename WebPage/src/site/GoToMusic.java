@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import data.Music;
 import data.Playlist;
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -36,16 +37,15 @@ public class GoToMusic extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession session = request.getSession();
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
+			Users login = action.getUserByID(session.getAttribute("user").toString());
+			request.setAttribute("nome", login.getNome());
 			String order = "ASC";
-
 			List<Music> lists = action.listMyMusicFiles(request.getSession().getAttribute("user").toString(), order);
 			List<Playlist> listplaylist = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), order);
-
 			if(lists!=null){
 				request.setAttribute("lists", lists);
 				request.setAttribute("listplaylist", listplaylist);
@@ -61,7 +61,6 @@ public class GoToMusic extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		
 	}
 
 }

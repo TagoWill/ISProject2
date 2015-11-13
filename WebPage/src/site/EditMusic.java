@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -39,19 +37,16 @@ public class EditMusic extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		String music_id = request.getParameter("getid");
 		String title = request.getParameter("title");
 		String artist = request.getParameter("artist");
 		String album = request.getParameter("album");
 		String year = request.getParameter("year");
 		if(action.editMusicFile(music_id, title, artist, album, year)){
-			request.setAttribute("error", "Salvo");
+			request.setAttribute("error", "Saved");
 		}else{
-			request.setAttribute("error", "Error: Nao foi salvo as alteracoes");
+			request.setAttribute("error", "Error: Cannot save changes");
 		}
-		
 		request.getRequestDispatcher("GoToMusic").forward(request, response);
 	}
-
 }

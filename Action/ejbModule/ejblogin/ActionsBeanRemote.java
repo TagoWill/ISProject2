@@ -6,15 +6,14 @@ import javax.ejb.Remote;
 
 import data.Music;
 import data.Playlist;
-import ligacao.Users;
+import data.Users;
 
 @Remote
 public interface ActionsBeanRemote {
 	public boolean registerUser(String nome, String user, String password, String email);
 	public boolean verifyRegister(String email);
 	public Users loginUser(String email, String password);
-	public Users devolverPorId(String id);
-	
+	public Users getUserByID(String id);
 	public boolean editProfile(String userid, String name, String mail, String password);
 	public boolean deleteProfile(String userid);
 	public Playlist getPlaylistName(String playlistid);

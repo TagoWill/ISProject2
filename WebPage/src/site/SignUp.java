@@ -55,19 +55,18 @@ public class SignUp extends HttpServlet {
         if(conta.verifyRegister(email)){
         	if(password.equals(password2)){
             	if(conta.registerUser(nome,username, password,email)){
-            		request.setAttribute("error", "Registo feito com sucesso");
+            		request.setAttribute("error", "Sign Up Successful");
             		request.getRequestDispatcher("index.jsp").forward(request, response);
             	}else{
-            		request.setAttribute("error", "Erro: Problemas no registo");
+            		request.setAttribute("error", "Error: Something Went Wrong");
             		request.getRequestDispatcher("/register.jsp").forward(request, response);
             	}
-            	
             }else{
-            	request.setAttribute("error", "Erro: Password nao estao iguais");
+            	request.setAttribute("error", "Error: Passwords Do Not Match");
             	request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
         }else{
-        	request.setAttribute("error", "Erro: Email ja existe");
+        	request.setAttribute("error", "Error: Email Already Registered");
         	request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
 	}

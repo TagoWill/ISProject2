@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import data.Music;
 import data.Playlist;
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -39,6 +40,8 @@ public class GoToSearch extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
+			Users login = action.getUserByID(session.getAttribute("user").toString());
+			request.setAttribute("nome", login.getNome());
 			List<Music> lists = action.listAllMusic();
 			List<Playlist> listplaylist = action.listMyPlaylists(request.getSession().getAttribute("user").toString(), "ASC");
 			if(lists!=null){

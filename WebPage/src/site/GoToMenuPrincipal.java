@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import data.Users;
 import ejblogin.ActionsBeanRemote;
-import ligacao.Users;
 
 /**
  * Servlet implementation class BackToMenuServlet
@@ -39,7 +39,7 @@ public class GoToMenuPrincipal extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
-			Users login = action.devolverPorId(session.getAttribute("user").toString());
+			Users login = action.getUserByID(session.getAttribute("user").toString());
 			if(login != null){
 				request.setAttribute("user", login.getUser());
 				request.setAttribute("nome", login.getNome());
@@ -58,7 +58,7 @@ public class GoToMenuPrincipal extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		Users login = action.devolverPorId(session.getAttribute("user").toString());
+		Users login = action.getUserByID(session.getAttribute("user").toString());
 		if(login != null){
 			request.setAttribute("user", login.getUser());
 			request.setAttribute("nome", login.getNome());

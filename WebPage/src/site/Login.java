@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import data.Users;
 import ejblogin.ActionsBeanRemote;
-import ligacao.Users;
 
 /**
  * Servlet implementation class Login

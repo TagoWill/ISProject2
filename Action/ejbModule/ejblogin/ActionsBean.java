@@ -1,7 +1,6 @@
 package ejblogin;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -10,12 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-
 import org.jboss.logging.Logger;
-
 import data.Music;
 import data.Playlist;
-import ligacao.Users;
+import data.Users;
 
 /**
  * Session Bean implementation class ActionsBean
@@ -23,14 +20,12 @@ import ligacao.Users;
 @Stateless
 @TransactionManagement(value=TransactionManagementType.BEAN)
 public class ActionsBean implements ActionsBeanRemote {
-
 	@PersistenceContext(name = "Users")
 	EntityManager Cursor;
 
 	@Resource
 	private UserTransaction userTransaction;
 
-	
 	private static Logger logger = Logger.getLogger(ActionsBean.class);
 	/**
 	 * Default constructor. 
@@ -66,12 +61,11 @@ public class ActionsBean implements ActionsBeanRemote {
 	public boolean verifyRegister(String email){
 		try{
 			logger.info("verifyRegister: Iniciado");
-			javax.persistence.Query q = Cursor.createQuery("from Users u where u.email = :t");
+			javax.persistence.Query q = Cursor.createQuery("FROM Users u WHERE u.email = :t");
 			q.setParameter("t", email);
-			logger.info("VverifyRegister: Criada query");
+			logger.info("verifyRegister: Executada Query Select User");
 			@SuppressWarnings("all")
 			Users conta = (Users) q.getSingleResult();
-			logger.info("verifyRegister: Verificar resultado");
 			if(conta == null){
 				logger.info("verifyRegister: Sucesso!");
 				return true;
@@ -88,11 +82,11 @@ public class ActionsBean implements ActionsBeanRemote {
 	public Users loginUser(String email, String password){
 		try{
 			logger.info("loginUser: Iniciado");
-			javax.persistence.Query q = Cursor.createQuery("from Users u where u.email = :t"
+			javax.persistence.Query q = Cursor.createQuery("FROM Users u WHERE u.email = :t"
 					+ " and password = :p");
 			q.setParameter("t", email);
 			q.setParameter("p", password);
-			logger.info("loginUser: Criada Query");
+			logger.info("loginUser: Executada Query Select User");
 			@SuppressWarnings("all")
 			Users conta = (Users) q.getSingleResult();
 			logger.info("loginUser: Sucesso!");
@@ -104,17 +98,17 @@ public class ActionsBean implements ActionsBeanRemote {
 	}
 
 	@Override
-	public Users devolverPorId(String id){
-		logger.info("GetUserByID: Iniciado");
-		javax.persistence.Query q = Cursor.createQuery("from Users u where u.id = :t");
+	public Users getUserByID(String id){
+		logger.info("getUserByID: Iniciado");
+		javax.persistence.Query q = Cursor.createQuery("FROM Users u WHERE u.id = :t");
 		q.setParameter("t", Integer.parseInt(id));
-		logger.info("GetUserByID: Criada Query");
+		logger.info("getUserByID: Executada Query Select User");
 		try{
 			Users conta = (Users) q.getSingleResult();
-			logger.info("GetUserByID: Sucesso!");
+			logger.info("getUserByID: Sucesso!");
 			return conta;
 		}catch(Exception e){
-			logger.error("GetUserByID: Falhou!");
+			logger.error("getUserByID: Falhou!");
 			return null;
 		}
 	}
@@ -132,9 +126,9 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue.setParameter("d", password);
 			queue.setParameter("b", Integer.parseInt(userid));
 			queue.executeUpdate();
-			logger.info("editProfile: Criada query");
+			logger.info("editProfile: Executada Query Update User");
 			userTransaction.commit();
-			logger.info("editProfile: Fim do processo");
+			logger.info("editProfile: Sucesso!");
 			return true;
 		}catch(Exception e){
 			logger.error("editProfile: Falhou! "+e);
@@ -155,22 +149,21 @@ public class ActionsBean implements ActionsBeanRemote {
 		javax.persistence.Query queue;
 		try{
 			userTransaction.begin();
-			logger.info("deleteProfile: GetUserByID");
-			Users conta = devolverPorId(userid);
-			logger.info("deleteProfile: Pagar as suas Playlists");
+			logger.info("deleteProfile: Link para GetUserByID");
+			Users conta = getUserByID(userid);
 			for(Playlist list : conta.getPlaylist()){
 				deletePlaylist(Integer.toString(list.getId()), false);
+				logger.info("deleteProfile: Apagada Playlist");
 			}
-			logger.info("deleteProfile: Desassociar as suas musicas");
 			for(Music list : conta.getSong()){
 				detachFromMusic(Integer.toString(list.getId()), false);
+				logger.info("deleteProfile: Apagada Musica");
 			}
-			logger.info("Criar query");
 			sql = "DELETE FROM Users u WHERE u.id = :b";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", conta.getId());
 			queue.executeUpdate();
-			logger.info("deleteProfile: Executar query apagar");
+			logger.info("deleteProfile: Executada Query Delete User");
 			userTransaction.commit();
 			logger.info("deleteProfile: Sucesso!");
 			return true;
@@ -190,7 +183,7 @@ public class ActionsBean implements ActionsBeanRemote {
 		logger.info("getPlaylistName: Iniciado");
 		javax.persistence.Query q = Cursor.createQuery("FROM Playlist p WHERE p.id = :i");
 		q.setParameter("i", Integer.parseInt(playlistid));
-		logger.info("getPlaylistName: Criada query");
+		logger.info("getPlaylistName: Executada Query Select Playlist");
 		try{
 			Playlist conta = (Playlist) q.getSingleResult();
 			logger.info("getPlaylistName: Sucesso!");
@@ -206,13 +199,13 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a	user, I	want to	create new playlists and assign	them a name
 		logger.info("addPlaylist: Iniciada");
 		try{
-			logger.info("addPlaylist: getUserByID");
-			Users conta = devolverPorId(userid);
+			logger.info("addPlaylist: Link para getUserByID");
+			Users conta = getUserByID(userid);
 			String sql = "FROM Playlist p WHERE p.playlist_name = :b AND p.user= :c";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", playlist_name);
 			queue.setParameter("c", conta);
-			logger.info("addPlaylist: Criada query");
+			logger.info("addPlaylist: Executada Query Select Playlist");
 			@SuppressWarnings("rawtypes")
 			List entities = queue.getResultList();
 			if(entities.size()>0){
@@ -244,13 +237,13 @@ public class ActionsBean implements ActionsBeanRemote {
 		logger.info("editPlaylist: Iniciado");
 		try{
 			userTransaction.begin();
-			Users conta = devolverPorId(userid);
-			logger.info("editPlaylist: getUserByID");
+			logger.info("editPlaylist: Link para getUserByID");
+			Users conta = getUserByID(userid);
 			String sql = "FROM Playlist p WHERE p.playlist_name = :b AND p.user= :c";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", playlist_name);
 			queue.setParameter("c", conta);
-			logger.info("editPlaylist: Criada query select");
+			logger.info("editPlaylist: Executada Query Select Playlist");
 			@SuppressWarnings("rawtypes")
 			List entities = queue.getResultList();
 			if(entities.size()>0){
@@ -262,7 +255,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("a", playlist_name);
 			queue.setParameter("b", Integer.parseInt(playlistid));
-			logger.info("editPlaylist: Criada query update");
+			logger.info("editPlaylist: Executada Query Update Playlist");
 			queue.executeUpdate();
 			userTransaction.commit();
 			logger.info("editPlaylist: Sucesso!");
@@ -292,7 +285,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(playlistid));
 			Playlist playlist = (Playlist) queue.getSingleResult();
-			logger.info("deletePlaylist: Criada query select");
+			logger.info("deletePlaylist: Executada Query Select Playlist");
 			playlist.setPlaylistSongs(null);
 			Cursor.persist(playlist);
 			logger.info("deletePlaylist: Persist Playlist");
@@ -300,7 +293,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(playlistid));
 			queue.executeUpdate();
-			logger.info("deletePlaylist: Criada query delete");
+			logger.info("deletePlaylist: Executada Query Delete Playlist");
 			if(iscommit == true)
 			{
 				userTransaction.commit();
@@ -327,8 +320,8 @@ public class ActionsBean implements ActionsBeanRemote {
 		logger.info("listMyPlaylists: Iniciado");
 		try{
 			userTransaction.begin();
-			Users conta = devolverPorId(userid);
-			logger.info("listMyPlaylists: getUserByID");
+			logger.info("listMyPlaylists: Link para getUserByID");
+			Users conta = getUserByID(userid);
 			String sql;
 			if(order.equals("ASC"))
 				sql = "FROM Playlist p WHERE p.user = :a ORDER BY p.playlist_name ASC";
@@ -336,7 +329,7 @@ public class ActionsBean implements ActionsBeanRemote {
 				sql = "FROM Playlist p WHERE p.user = :a ORDER BY p.playlist_name DESC";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", conta);
-			logger.info("listMyPlaylists: Criada query select order by");
+			logger.info("listMyPlaylists: Executada Query Select Playlist Order By");
 			@SuppressWarnings("unchecked")
 			List<Playlist> list = queue.getResultList();
 			logger.info("listMyPlaylists: Sucesso!");
@@ -358,12 +351,12 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a	user, I	want to	list music files associated	to each playlist. The user might have to select the playlist for that.
 		logger.info("listMyMusicFiles: Iniciado");
 		try{
-			Users conta = devolverPorId(userid);
-			logger.info("listMyMusicFiles: getUserByID");
+			logger.info("listMyMusicFiles: Link para getUserByID");
+			Users conta = getUserByID(userid);
 			String sql = "FROM Music m WHERE m.user = :a ORDER BY m.title ASC";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", conta);
-			logger.info("listMyMusicFiles: Criada query");
+			logger.info("listMyMusicFiles: Executada Query Select Music");
 			@SuppressWarnings("unchecked")
 			List<Music> list = queue.getResultList();
 			logger.info("listMyMusicFiles: Sucesso!");
@@ -384,7 +377,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(playlistid));
 			Playlist playlist = (Playlist) queue.getSingleResult();
-			logger.info("listMyMusicFilesByPlaylist: Criada query");
+			logger.info("listMyMusicFilesByPlaylist: Executada Query Select Playlist");
 			List<Music> musica = playlist.getPlaylistSongs();
 			logger.info("listMyMusicFilesByPlaylist: Sucesso!");
 			userTransaction.commit();
@@ -411,12 +404,12 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(musicid));
 			Music musica = (Music) queue.getSingleResult();
-			logger.info("addMusicFileToPlaylist: Criada query select Music");
+			logger.info("addMusicFileToPlaylist: Executada Query Select Music");
 			sql = "FROM Playlist p WHERE p.id= :a";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(playlistid));
 			Playlist playlist = (Playlist) queue.getSingleResult();
-			logger.info("addMusicFileToPlaylist: Criada query select Playlist");
+			logger.info("addMusicFileToPlaylist: Executada Query Select Playlist");
 			List<Playlist> addplaylist = musica.getPlaylist();
 			List<Music> addmusic = playlist.getPlaylistSongs();
 			if(addmusic.indexOf(musica) != -1){
@@ -456,12 +449,12 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(music_id));
 			Music musica = (Music) queue.getSingleResult();
-			logger.info("deleteMusicFileFromPlaylist: Criada query select musica");
+			logger.info("deleteMusicFileFromPlaylist: Executada Query Select Music");
 			sql = "FROM Playlist p WHERE p.id= :a";
 			queue = Cursor.createQuery(sql);
 			queue.setParameter("a", Integer.parseInt(playlist_id));
 			Playlist playlist = (Playlist) queue.getSingleResult();
-			logger.info("deleteMusicFileFromPlaylist: Criada query select playlist");
+			logger.info("deleteMusicFileFromPlaylist: Executada Query Select Playlist");
 			List<Music> listmusic = playlist.getPlaylistSongs();
 			listmusic.remove(musica);
 			logger.info("deleteMusicFileFromPlaylist: Removida musica da associacao");
@@ -487,14 +480,14 @@ public class ActionsBean implements ActionsBeanRemote {
 		// As a	user, I	want to	add	new	music to the application, identifying the title, artist, album, year and path to the file to upload	to the server.
 		logger.info("addMusicFile: Iniciado");
 		try{
-			Users conta = devolverPorId(userid);
-			logger.info("addMusicFile: getUserByID");
+			logger.info("addMusicFile: Link para getUserByID");
+			Users conta = getUserByID(userid);
 			userTransaction.begin();
 			String sql = "FROM Music m WHERE m.title = :b AND m.artist= :c";
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", title);
 			queue.setParameter("c", artist);
-			logger.info("addMusicFile: Criada query select music");
+			logger.info("addMusicFile: Executada Query Select Music");
 			@SuppressWarnings("rawtypes")
 			List entities = queue.getResultList();
 			if(entities.size()>0){
@@ -518,13 +511,14 @@ public class ActionsBean implements ActionsBeanRemote {
 			return false;
 		}
 	}
+	
 	@Override
 	public Music getInfoMusicFile(String musicid){
 		// Return Music info
 		logger.info("getInfoMusicFile: Iniciado");
 		javax.persistence.Query q = Cursor.createQuery("FROM Music m WHERE m.id = :t");
 		q.setParameter("t", Integer.parseInt(musicid));
-		logger.info("getInfoMusicFile: Criada query select music");
+		logger.info("getInfoMusicFile: Executada Query Select Music");
 		try{
 			Music infomusic = (Music) q.getSingleResult();
 			logger.info("getInfoMusicFile: Sucesso!");
@@ -534,7 +528,6 @@ public class ActionsBean implements ActionsBeanRemote {
 			return null;
 		}
 	}
-
 
 	@Override
 	public boolean editMusicFile(String musicid, String title, String artist, String album, String year) {
@@ -546,7 +539,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", title);
 			queue.setParameter("c", artist);
-			logger.info("editMusicFile: Criada query select music");
+			logger.info("editMusicFile: Executada Query Select Music");
 			@SuppressWarnings("rawtypes")
 			List entities = queue.getResultList();
 			if(entities.size()>0){
@@ -562,7 +555,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			queue.setParameter("e", year);
 			queue.setParameter("b", Integer.parseInt(musicid));
 			queue.executeUpdate();
-			logger.info("editMusicFile: Criada query update music");
+			logger.info("editMusicFile: Executada Query Update Music");
 			userTransaction.commit();
 			logger.info("editMusicFile: Sucesso!");
 			return true;
@@ -590,7 +583,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			queue.setParameter("b", Integer.parseInt(musicid));
 			queue.executeUpdate();
-			logger.info("detachFromMusic: Criada query update music");
+			logger.info("detachFromMusic: Executada Query Update Music");
 			if(iscommit)
 				userTransaction.commit();
 			logger.info("detachFromMusic: Sucesso!");
@@ -617,7 +610,7 @@ public class ActionsBean implements ActionsBeanRemote {
 			javax.persistence.Query queue = Cursor.createQuery(sql);
 			@SuppressWarnings("unchecked")
 			List<Music> list = queue.getResultList();
-			logger.info("listAllMusic: Criada query select music");
+			logger.info("listAllMusic: Executada Query Select Music");
 			logger.info("listAllMusic: Sucesso!");
 			return list;
 		}catch(Exception e){
@@ -645,7 +638,7 @@ public class ActionsBean implements ActionsBeanRemote {
 				queue.setParameter("a", artist);
 				System.out.println("artist: "+artist);
 			}
-			logger.info("searchAndListMusic: Criada query select music");
+			logger.info("searchAndListMusic: Executada Query Select Music");
 			@SuppressWarnings("unchecked")
 			List<Music> list = queue.getResultList();
 			logger.info("searchAndListMusic: Sucesso!");

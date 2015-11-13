@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -42,13 +43,14 @@ public class DeleteProfile extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
 		HttpSession session = request.getSession();
-		
 		if(action.deleteProfile(session.getAttribute("user").toString())){
 			session.invalidate();
 			response.sendRedirect("index.jsp");
 		}else{
-			request.setAttribute("error", "Error: Utilizador nao apagado");
-    		request.getRequestDispatcher("/sessao/prefil.jsp").forward(request, response);
+			Users login = action.getUserByID(session.getAttribute("user").toString());
+			request.setAttribute("nome", login.getNome());
+			request.setAttribute("error", "Error: Couldn't Delete User");
+    		request.getRequestDispatcher("/sessao/menuprofile.jsp").forward(request, response);
 		}
 		
 	}

@@ -11,24 +11,14 @@ pageEncoding="ISO-8859-1"%>
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
 
-	<title>Menu</title>
+	<title>Music Library - Home</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="dashboard.css" rel="stylesheet">
-
-	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-	<script src="assets/js/ie-emulation-modes-warning.js"></script>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-  </head>
+</head>
 
   <body>
   	<div class="container theme-showcase" role="main">
@@ -45,10 +35,10 @@ pageEncoding="ISO-8859-1"%>
   				</div>
   				<div id="navbar" class="navbar-collapse collapse">
   					<ul class="nav navbar-nav navbar-right">
+  						<li><a href="GoToProfile">${nome}</a></li>
   						<li><a href="GoToSearch">Search</a></li>
   						<li><a href="GoToPlaylist">My Playlists</a></li>
   						<li><a href="GoToMusic">My Music</a></li>
-  						<li><a href="GoToProfile">Profile</a></li>
   						<li><a href="LogOut">Logout</a></li>
   					</ul>
   				</div>
@@ -57,17 +47,15 @@ pageEncoding="ISO-8859-1"%>
   		<div class="page-header" >
   		</div>
   		<div class="page-header" >
-  			<h1>Welcome ${nome}</h1> 
+  			<center><h1>Welcome ${nome}</h1></center>
   		</div>
+  		<br>
+  		<center><img src="img/playlist_album_collection.png"/></center>
   	</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

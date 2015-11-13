@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.Playlist;
+import data.Users;
 import ejblogin.ActionsBeanRemote;
 
 /**
@@ -40,6 +41,8 @@ public class GoToPlaylist extends HttpServlet {
 		if(session == null || session.getAttribute("user") == null){
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}else{
+			Users login = action.getUserByID(session.getAttribute("user").toString());
+			request.setAttribute("nome", login.getNome());
 			String order;
 			if(request == null || request.getAttribute("order")==null){
 				request.setAttribute("order", "ASC");
